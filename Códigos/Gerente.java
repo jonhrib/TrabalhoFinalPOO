@@ -20,5 +20,12 @@ public class Gerente extends Conta {
 		return false;
 	}
 
-}
+	public String getID() {
+		return ID;
+	}
 
+	public void setID(String iD) {
+		ID = iD;
+	}
+
+}
