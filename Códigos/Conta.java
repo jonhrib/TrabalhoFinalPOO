@@ -1,11 +1,17 @@
+import java.sql.SQLException;
 
-public abstract class Conta {
+public abstract class Conta extends Conexao {
+	
+	Conta() throws ClassNotFoundException, SQLException {
+		super();
+	}
+
 	String UF;
 	String agencia;
 	String senha;
 	String nome;
 	
-	abstract void acessar ();
+	abstract boolean acessar ();
 
 	public String getUF() {
 		return UF;
