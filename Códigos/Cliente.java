@@ -1,5 +1,12 @@
+import java.sql.SQLException;
 
 public class Cliente extends Conta {
+	
+	Cliente() throws ClassNotFoundException, SQLException {
+		super();
+		
+	}
+
 	String numconta;
 	int idade;
 	String cpf;
@@ -10,8 +17,9 @@ public class Cliente extends Conta {
 	double divida;
 
 	@Override
-	void acessar() {
+	boolean acessar() {
 		
+		return false;
 	}
 	
 	void editarconta () {
@@ -46,6 +54,15 @@ public class Cliente extends Conta {
 	        // Aplica a formatação do CPF (###.###.###-##)
 	    return cpf.substring(0, 3) + "." + cpf.substring(3, 6) + "." + cpf.substring(6, 9) + "-" + cpf.substring(9);
    }
+	
+	public static String formatarTelefone(String telefone) {
+	    // Remove qualquer caracter que não seja um dígito
+	    telefone = telefone.replaceAll("[^0-9]", "");
+
+	    // Aplica a formatação do telefone (xx) xxxx-xxxx
+	    return "(" + telefone.substring(0, 2) + ") " + telefone.substring(2, 6) + "-" + telefone.substring(6, 10);
+	}
+
 
 	public String getNumconta() {
 		return numconta;
@@ -92,7 +109,7 @@ public class Cliente extends Conta {
 	}
 
 	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+		this.telefone = formatarTelefone(telefone);
 	}
 
 	public double getSaldo() {
