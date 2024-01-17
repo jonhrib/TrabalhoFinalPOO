@@ -1,6 +1,8 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
@@ -46,6 +48,11 @@ public class Inicial {
 		frame.setBounds(100, 100, 986, 592);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+//		// Adiciona um JLabel como plano de fundo
+//        JLabel background = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface.png"));
+//        background.setBounds(0, 0, 986, 592);
+//        frame.getContentPane().add(background);
 		
 		JButton btnNewButton = new JButton("Cliente");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
