@@ -14,8 +14,6 @@ import java.awt.Color;
 import javax.swing.JTextPane;
 import java.awt.Font;
 
-import Classes.*;
-
 public class Inicial extends JFrame{
 
 	private JFrame frame;
@@ -46,9 +44,9 @@ public class Inicial extends JFrame{
 		frame.getContentPane().setLayout(null);
 		
 		// plano de fundo, não consegui deixar os elementos superiores a ele
-//        JLabel background = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface.png"));
-//        background.setBounds(0, 0, 986, 592);
-//        frame.getContentPane().add(background);
+        JLabel background = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface.png"));
+        background.setBounds(0, 0, 986, 592);
+        frame.getContentPane().add(background);
 		
 		JButton btnNewButton = new JButton("Cliente");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -64,7 +62,8 @@ public class Inicial extends JFrame{
 		JButton btnGerente = new JButton("Gerente");
 		btnGerente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				AcessoGerente acessargerente = new AcessoGerente();
+				acessargerente.setVisible(true);
 			}
 		});
 		btnGerente.setFont(new Font("Tahoma", Font.PLAIN, 16));
