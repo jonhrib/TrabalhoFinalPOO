@@ -13,6 +13,8 @@ import java.awt.Canvas;
 import java.awt.Color;
 import javax.swing.JTextPane;
 import java.awt.Font;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 public class Inicial extends JFrame{
 
@@ -41,12 +43,9 @@ public class Inicial extends JFrame{
 		frame = new JFrame();
 		frame.setBounds(100, 100, 986, 592);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
 		
 		// plano de fundo, não consegui deixar os elementos superiores a ele
-        JLabel background = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface.png"));
-        background.setBounds(0, 0, 986, 592);
-        frame.getContentPane().add(background);
+        JLabel background = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface2.png"));
 		
 		JButton btnNewButton = new JButton("Cliente");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -56,8 +55,6 @@ public class Inicial extends JFrame{
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewButton.setBounds(301, 346, 173, 57);
-		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnGerente = new JButton("Gerente");
 		btnGerente.addActionListener(new ActionListener() {
@@ -67,16 +64,41 @@ public class Inicial extends JFrame{
 			}
 		});
 		btnGerente.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnGerente.setBounds(500, 346, 173, 57);
-		frame.getContentPane().add(btnGerente);
 		
 		JTextPane txtpnSelecioneUmModo = new JTextPane();
+		txtpnSelecioneUmModo.setForeground(new Color(255, 255, 255));
 		txtpnSelecioneUmModo.setEditable(false);
 		txtpnSelecioneUmModo.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 16));
 		txtpnSelecioneUmModo.setText("Selecione um modo de entrada");
-		txtpnSelecioneUmModo.setBounds(372, 315, 249, 32);
-		txtpnSelecioneUmModo.setOpaque(false); //deixa o fundo do texto transparente
-		frame.getContentPane().add(txtpnSelecioneUmModo);
+		txtpnSelecioneUmModo.setOpaque(false);
+		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(372)
+					.addComponent(txtpnSelecioneUmModo, GroupLayout.PREFERRED_SIZE, 249, GroupLayout.PREFERRED_SIZE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(301)
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(500)
+					.addComponent(btnGerente, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE))
+				.addComponent(background)
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(315)
+					.addComponent(txtpnSelecioneUmModo, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(346)
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(346)
+					.addComponent(btnGerente, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+				.addComponent(background)
+		);
+		frame.getContentPane().setLayout(groupLayout);
 	}
 
 }
