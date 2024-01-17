@@ -16,12 +16,12 @@ public class Gerente extends Conta {
 		return false;
 	}
 	
-	void criarconta () throws SQLException {
+	void criarconta (String nome, String uf, String agencia, String numconta, int idade, String cpf, String senha, String tipodeconta, double renda, double saldo, double divida, String telefone) throws SQLException {
 	
-//		String SQLInsert = "insert into cliente (nome,uf,agencia,numconta,idade,cpf,senha,tipodeconta,renda,saldo,divida,telefone) VALUES ('Jorge','PR','0001','003',18,'000.115.879-98','123456AB','Estudantil',2500,256.89,5000,'(43)xxxx-xxxx')";
-//		Statement stmt = con.createStatement();
-//		stmt.executeUpdate(SQLInsert);
-		
+		//System.out.println("insert into cliente (nome,uf,agencia,numconta,idade,cpf,senha,tipodeconta,renda,saldo,divida,telefone) VALUES ('" + nome + "'," + "'" + uf + "'," + "'" + agencia + "','" + numconta + "'," + idade + ",'" + cpf + "','" + senha + "','" + tipodeconta + "'," + renda + "," + saldo + "," + divida +  ",'" + telefone + "')");
+		String SQLInsert = "insert into cliente (nome,uf,agencia,numconta,idade,cpf,senha,tipodeconta,renda,saldo,divida,telefone) VALUES ('" + nome + "'," + "'" + uf + "'," + "'" + agencia + "','" + numconta + "'," + idade + ",'" + cpf + "','" + senha + "','" + tipodeconta + "'," + renda + "," + saldo + "," + divida +  ",'" + telefone + "')";
+		Statement stmt = con.createStatement();
+		stmt.executeUpdate(SQLInsert);
 		
 	}
 	
