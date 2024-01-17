@@ -18,7 +18,6 @@ public class Main {
 		
 		Gerente g = new Gerente ();
 		
-		g.criarconta();
+		g.criarconta("Robert","PR","0001","003",18,"000.115.879-98","123456AB","Estudantil",2500,256.89,5000,"(43)xxxx-xxxx");
 	}
 }
-
