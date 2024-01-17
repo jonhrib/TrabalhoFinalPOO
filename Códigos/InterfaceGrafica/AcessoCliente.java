@@ -15,6 +15,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextPane;
 import java.awt.Font;
 import java.awt.Color;
+import Classes.*;
 
 public class AcessoCliente extends JFrame {
 
@@ -24,6 +25,7 @@ public class AcessoCliente extends JFrame {
 	private JTextField textConta;
 	private JPasswordField passwordField;
 	private JTextPane txtpnDigiteSeusDados;
+	private JTextPane txtpnCliente;
 	private JCheckBox chckbxMostrarSenha;
 	private JButton btnNewButton;
 
@@ -121,6 +123,15 @@ public class AcessoCliente extends JFrame {
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
         btnNewButton.setBounds(286, 287, 117, 32);
         contentPane.add(btnNewButton);
+        
+        txtpnCliente = new JTextPane();
+        txtpnCliente.setForeground(new Color(0, 0, 160));
+        txtpnCliente.setText("CLIENTES");
+        txtpnCliente.setOpaque(false);
+        txtpnCliente.setFont(new Font("BancoDoBrasil Textos", Font.BOLD | Font.ITALIC, 22));
+        txtpnCliente.setEditable(false);
+        txtpnCliente.setBounds(98, 87, 123, 30);
+        contentPane.add(txtpnCliente);
 		
 	}
 
