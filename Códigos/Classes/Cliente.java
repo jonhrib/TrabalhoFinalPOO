@@ -1,8 +1,11 @@
+package Classes;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Cliente extends Conta {
 	
-	Cliente() throws ClassNotFoundException, SQLException {
+	public Cliente() throws ClassNotFoundException, SQLException {
 		super();
 		
 	}
@@ -17,9 +20,59 @@ public class Cliente extends Conta {
 	double divida;
 
 	@Override
-	boolean acessar() {
+	public boolean acessar(int cod, String s, String s1, String s2) throws SQLException {
+		Statement stmt = con.createStatement();
+		boolean result = false;
 		
-		return false;
+		if (cod == 1) { //Agencia
+			//"select nome,uf,agencia,numconta,idade,cpf,senha,tipodeconta,renda,saldo,divida,telefone from cliente"
+			ResultSet dados = stmt.executeQuery("select agencia from cliente");
+			if (dados.isBeforeFirst()) {
+				
+				while (dados.next()) {
+					String agencia = dados.getString(1);
+					if (s.equals(agencia)) {
+						result = true;
+					}
+				}
+			}
+			
+			return result;
+		} 
+		else if (cod == 2) { //Conta
+			ResultSet dados = stmt.executeQuery("select agencia,numconta from cliente");
+			if (dados.isBeforeFirst()) {
+				
+				while (dados.next()) {
+					String agencia = dados.getString(1);
+					String conta = dados.getString(2);
+					if (s.equals(agencia) && s1.equals(conta)) {
+						result = true;
+					}
+				}
+			}
+			
+			return result;
+		}
+		else if (cod == 3) { //Senha
+			ResultSet dados = stmt.executeQuery("select agencia,numconta,senha from cliente");
+			if (dados.isBeforeFirst()) {
+				
+				while (dados.next()) {
+					String agencia = dados.getString(1);
+					String conta = dados.getString(2);
+					String senha = dados.getString(3);
+					
+					if (s.equals(agencia) && s1.equals(conta) && s2.equals(senha)) {
+						result = true;
+					}
+				}
+			}
+			
+			return result;
+		}
+		else return false;
+
 	}
 	
 	void editarconta () {
@@ -127,4 +180,5 @@ public class Cliente extends Conta {
 	public void setDivida(double divida) {
 		this.divida = divida;
 	}
+
 }
