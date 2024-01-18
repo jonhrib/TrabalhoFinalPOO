@@ -1,4 +1,6 @@
+package Classes;
 import java.sql.SQLException;
+
 
 public abstract class Conta extends Conexao {
 	
@@ -11,7 +13,7 @@ public abstract class Conta extends Conexao {
 	String senha;
 	String nome;
 	
-	abstract boolean acessar ();
+	public abstract boolean acessar (int cod, String s, String s1, String s2) throws SQLException;
 
 	public String getUF() {
 		return UF;
@@ -44,4 +46,5 @@ public abstract class Conta extends Conexao {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 }
