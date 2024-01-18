@@ -2,6 +2,7 @@ package InterfaceGrafica;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -9,6 +10,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -16,6 +19,8 @@ import javax.swing.JTextPane;
 import java.awt.Font;
 import java.awt.Color;
 import Classes.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class AcessoCliente extends JFrame {
 
@@ -28,6 +33,8 @@ public class AcessoCliente extends JFrame {
 	private JTextPane txtpnCliente;
 	private JCheckBox chckbxMostrarSenha;
 	private JButton btnNewButton;
+	private JTextPane txtpnContaNoEncontrada;
+	private JTextPane txtpnSenhaIncorreta;
 
 	/**
 	 * Launch the application.
@@ -57,25 +64,101 @@ public class AcessoCliente extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JTextPane txtpnAgnciaNoEncontrada = new JTextPane();
+        txtpnAgnciaNoEncontrada.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 12));
+        txtpnAgnciaNoEncontrada.setText("Agência não encontrada");
+        txtpnAgnciaNoEncontrada.setBounds(606, 224, 171, 29);
+        txtpnAgnciaNoEncontrada.setOpaque(false); //deixa o fundo do texto transparente
+        contentPane.add(txtpnAgnciaNoEncontrada);
+        txtpnAgnciaNoEncontrada.setVisible(false);
+        
+        txtpnContaNoEncontrada = new JTextPane();
+        txtpnContaNoEncontrada.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 12));
+        txtpnContaNoEncontrada.setText("Conta não encontrada");
+        txtpnContaNoEncontrada.setBounds(606, 269, 150, 23);
+        txtpnContaNoEncontrada.setOpaque(false); //deixa o fundo do texto transparente
+        txtpnContaNoEncontrada.setVisible(false);
+        contentPane.add(txtpnContaNoEncontrada);
+        
+        txtpnSenhaIncorreta = new JTextPane();
+        txtpnSenhaIncorreta.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 12));
+        txtpnSenhaIncorreta.setText("Senha incorreta");
+        txtpnSenhaIncorreta.setBounds(606, 305, 150, 23);
+        txtpnSenhaIncorreta.setOpaque(false);
+        contentPane.add(txtpnSenhaIncorreta);
+        txtpnSenhaIncorreta.setVisible(false);
+		
 		textAgncia = new JTextField();
-		textAgncia.setBounds(57, 154, 191, 29);
+		textAgncia.addFocusListener(new FocusAdapter() {
+			public void focusLost(FocusEvent e) {
+				Cliente c = null;
+				try {
+					c = new Cliente();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				try {
+					if (!c.acessar(1,textAgncia.getText(),null,null)) {
+						textConta.setEditable(false);
+						passwordField.setEditable(false);
+						txtpnAgnciaNoEncontrada.setVisible(true);
+					}
+					else {
+						textConta.setEditable(true);
+						passwordField.setEditable(true);
+						txtpnAgnciaNoEncontrada.setVisible(false);
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		textAgncia.setBounds(328, 224, 191, 29);
 		contentPane.add(textAgncia);
 		textAgncia.setColumns(10);
 		
 		textConta = new JTextField();
+		textConta.addFocusListener(new FocusAdapter() {
+			public void focusLost(FocusEvent e) {
+				Cliente c = null;
+				try {
+					c = new Cliente();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				try {
+					if (!c.acessar(2,textAgncia.getText(),textConta.getText(),null)) {
+						passwordField.setEditable(false);
+						txtpnContaNoEncontrada.setVisible(true);
+					}
+					else {
+						passwordField.setEditable(true);
+						txtpnContaNoEncontrada.setVisible(false);
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		
 		textConta.setColumns(10);
-		textConta.setBounds(57, 193, 191, 29);
+		textConta.setBounds(328, 263, 191, 29);
 		contentPane.add(textConta);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(57, 232, 191, 29);
+		passwordField.setBounds(328, 302, 191, 29);
 		contentPane.add(passwordField);
 		
 		JTextPane txtpnAgncia = new JTextPane();
 		txtpnAgncia.setEditable(false);
 		txtpnAgncia.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
 		txtpnAgncia.setText("AGÊNCIA");
-		txtpnAgncia.setBounds(255, 158, 83, 23);
+		txtpnAgncia.setBounds(526, 228, 83, 23);
 		txtpnAgncia.setOpaque(false); //deixa o fundo do texto transparente
 		contentPane.add(txtpnAgncia);
 		
@@ -83,7 +166,7 @@ public class AcessoCliente extends JFrame {
 		txtpnConta.setEditable(false);
 		txtpnConta.setText("CONTA");
 		txtpnConta.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
-		txtpnConta.setBounds(255, 196, 83, 23);
+		txtpnConta.setBounds(526, 266, 83, 23);
 		txtpnConta.setOpaque(false); //deixa o fundo do texto transparente
 		contentPane.add(txtpnConta);
 		
@@ -91,7 +174,7 @@ public class AcessoCliente extends JFrame {
 		txtpnSenha.setEditable(false);
 		txtpnSenha.setText("SENHA");
 		txtpnSenha.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
-		txtpnSenha.setBounds(255, 235, 83, 23);
+		txtpnSenha.setBounds(526, 305, 83, 23);
 		txtpnSenha.setOpaque(false); //deixa o fundo do texto transparente
 		contentPane.add(txtpnSenha);
 		
@@ -99,13 +182,13 @@ public class AcessoCliente extends JFrame {
 		txtpnDigiteSeusDados.setEditable(false);
 		txtpnDigiteSeusDados.setFont(new Font("BancoDoBrasil Textos", Font.BOLD | Font.ITALIC, 14));
 		txtpnDigiteSeusDados.setText("Digite seus dados para acessar");
-		txtpnDigiteSeusDados.setBounds(43, 121, 222, 30);
+		txtpnDigiteSeusDados.setBounds(314, 191, 222, 30);
 		txtpnDigiteSeusDados.setOpaque(false); //deixa o fundo do texto transparente
 		contentPane.add(txtpnDigiteSeusDados);
 		
 		// checkbox para mostrar ou ocultar a senha
         chckbxMostrarSenha = new JCheckBox("Mostrar Senha");
-        chckbxMostrarSenha.setBounds(57, 271, 150, 23);
+        chckbxMostrarSenha.setBounds(328, 341, 150, 23);
         chckbxMostrarSenha.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -119,9 +202,35 @@ public class AcessoCliente extends JFrame {
         contentPane.add(chckbxMostrarSenha);
         
         btnNewButton = new JButton("ENTRAR");
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		Cliente c = null;
+				try {
+					c = new Cliente();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				try {
+					char[] senhachar = passwordField.getPassword(); //pega o texto presente na passwordfield em um array de char
+	                String senha = new String(senhachar); //transforma o array de char em String
+	                
+					if (!c.acessar(3,textAgncia.getText(),textConta.getText(),senha)) {
+				        txtpnSenhaIncorreta.setVisible(true);
+					}
+					else {
+						txtpnSenhaIncorreta.setVisible(false);
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+        	}
+        });
+        
         btnNewButton.setBackground(new Color(255, 255, 255));
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        btnNewButton.setBounds(286, 287, 117, 32);
+        btnNewButton.setBounds(557, 357, 117, 32);
         contentPane.add(btnNewButton);
         
         txtpnCliente = new JTextPane();
@@ -130,9 +239,11 @@ public class AcessoCliente extends JFrame {
         txtpnCliente.setOpaque(false);
         txtpnCliente.setFont(new Font("BancoDoBrasil Textos", Font.BOLD | Font.ITALIC, 22));
         txtpnCliente.setEditable(false);
-        txtpnCliente.setBounds(98, 87, 123, 30);
+        txtpnCliente.setBounds(369, 157, 123, 30);
         contentPane.add(txtpnCliente);
+        
+        
+        
 		
 	}
-
 }
