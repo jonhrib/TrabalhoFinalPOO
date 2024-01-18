@@ -67,7 +67,7 @@ public class AcessoCliente extends JFrame {
 		JTextPane txtpnAgnciaNoEncontrada = new JTextPane();
         txtpnAgnciaNoEncontrada.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 12));
         txtpnAgnciaNoEncontrada.setText("Agência não encontrada");
-        txtpnAgnciaNoEncontrada.setBounds(606, 224, 171, 29);
+        txtpnAgnciaNoEncontrada.setBounds(604, 228, 171, 29);
         txtpnAgnciaNoEncontrada.setOpaque(false); //deixa o fundo do texto transparente
         contentPane.add(txtpnAgnciaNoEncontrada);
         txtpnAgnciaNoEncontrada.setVisible(false);
@@ -220,8 +220,10 @@ public class AcessoCliente extends JFrame {
 					}
 					else {
 						txtpnSenhaIncorreta.setVisible(false);
+						MenuCliente menuc = new MenuCliente(textAgncia.getText(),textConta.getText());
+						menuc.setVisible(true);
 					}
-				} catch (SQLException e1) {
+				} catch (SQLException | ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -241,9 +243,6 @@ public class AcessoCliente extends JFrame {
         txtpnCliente.setEditable(false);
         txtpnCliente.setBounds(369, 157, 123, 30);
         contentPane.add(txtpnCliente);
-        
-        
-        
-		
+        	
 	}
 }
