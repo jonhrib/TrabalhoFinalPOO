@@ -16,6 +16,9 @@ import javax.swing.JTextPane;
 import java.awt.Font;
 import java.awt.Color;
 import Classes.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.sql.SQLException;
 
 public class AcessoGerente extends JFrame {
 
@@ -28,6 +31,9 @@ public class AcessoGerente extends JFrame {
 	private JCheckBox chckbxMostrarSenha;
 	private JButton btnNewButton;
 	private JTextPane txtpnGerncia;
+	private JTextPane txtpnAgnciaNoEncontrada;
+	private JTextPane txtpnIdNoEncontrado;
+	private JTextPane txtpnSenhaIncorreta;
 
 	/**
 	 * Launch the application.
@@ -57,12 +63,87 @@ public class AcessoGerente extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		txtpnAgnciaNoEncontrada = new JTextPane();
+        txtpnAgnciaNoEncontrada.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 12));
+        txtpnAgnciaNoEncontrada.setText("Agência não encontrada");
+        txtpnAgnciaNoEncontrada.setBounds(605, 228, 164, 29);
+        txtpnAgnciaNoEncontrada.setOpaque(false);
+        txtpnAgnciaNoEncontrada.setVisible(false);
+        contentPane.add(txtpnAgnciaNoEncontrada);
+        
+        txtpnIdNoEncontrado = new JTextPane();
+        txtpnIdNoEncontrado.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 12));
+        txtpnIdNoEncontrado.setText("ID não encontrado");
+        txtpnIdNoEncontrado.setBounds(606, 266, 142, 23);
+        txtpnIdNoEncontrado.setOpaque(false);
+        txtpnIdNoEncontrado.setVisible(false);
+        contentPane.add(txtpnIdNoEncontrado);
+        
+        txtpnSenhaIncorreta = new JTextPane();
+        txtpnSenhaIncorreta.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 12));
+        txtpnSenhaIncorreta.setText("Senha incorreta");
+        txtpnSenhaIncorreta.setBounds(605, 304, 143, 25);
+        txtpnSenhaIncorreta.setOpaque(false);
+        txtpnSenhaIncorreta.setVisible(false);
+        contentPane.add(txtpnSenhaIncorreta);
+		
+		
 		textAgncia = new JTextField();
+		textAgncia.addFocusListener(new FocusAdapter() {
+			public void focusLost(FocusEvent e) {
+				Gerente g = null;
+				try {
+					g = new Gerente();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				try {
+					if (!g.acessar(1,textAgncia.getText(),null,null)) {
+						textID.setEditable(false);
+						passwordField.setEditable(false);
+						txtpnAgnciaNoEncontrada.setVisible(true);
+					}
+					else {
+						textID.setEditable(true);
+						passwordField.setEditable(true);
+						txtpnAgnciaNoEncontrada.setVisible(false);
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		textAgncia.setBounds(332, 224, 191, 29);
 		contentPane.add(textAgncia);
 		textAgncia.setColumns(10);
 		
 		textID = new JTextField();
+		textID.addFocusListener(new FocusAdapter() {
+			public void focusLost(FocusEvent e) {
+				Gerente g = null;
+				try {
+					g = new Gerente();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				try {
+					if (!g.acessar(2,textAgncia.getText(),textID.getText(),null)) {
+						passwordField.setEditable(false);
+						txtpnIdNoEncontrado.setVisible(true);
+					}
+					else {
+						passwordField.setEditable(true);
+						txtpnIdNoEncontrado.setVisible(false);
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		textID.setColumns(10);
 		textID.setBounds(332, 263, 191, 29);
 		contentPane.add(textID);
@@ -119,6 +200,36 @@ public class AcessoGerente extends JFrame {
         contentPane.add(chckbxMostrarSenha);
         
         btnNewButton = new JButton("ENTRAR");
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		Gerente g = null;
+				try {
+					g = new Gerente();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				try {
+					char[] senhachar = passwordField.getPassword(); //pega o texto presente na passwordfield em um array de char
+	                String senha = new String(senhachar); //transforma o array de char em String
+	                
+					if (!g.acessar(3,textAgncia.getText(),textID.getText(),senha)) {
+				        txtpnSenhaIncorreta.setVisible(true);
+					}
+					else {
+						txtpnSenhaIncorreta.setVisible(false);
+						MenuGerente menug = new MenuGerente(textAgncia.getText(),textID.getText());
+						menug.setVisible(true);
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+        	}
+        });
         btnNewButton.setBackground(new Color(255, 255, 255));
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
         btnNewButton.setBounds(561, 357, 117, 32);
@@ -132,7 +243,8 @@ public class AcessoGerente extends JFrame {
         txtpnGerncia.setEditable(false);
         txtpnGerncia.setBounds(373, 157, 123, 30);
         contentPane.add(txtpnGerncia);
-		
+        
+        
 	}
 
 }
