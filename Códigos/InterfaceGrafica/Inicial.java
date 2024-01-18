@@ -47,14 +47,14 @@ public class Inicial extends JFrame{
 		// plano de fundo, não consegui deixar os elementos superiores a ele
         JLabel background = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface2.png"));
 		
-		JButton btnNewButton = new JButton("Cliente");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnCliente = new JButton("Cliente");
+		btnCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AcessoCliente acessarcliente = new AcessoCliente();
 				acessarcliente.setVisible(true);
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnCliente.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		JButton btnGerente = new JButton("Gerente");
 		btnGerente.addActionListener(new ActionListener() {
@@ -71,6 +71,7 @@ public class Inicial extends JFrame{
 		txtpnSelecioneUmModo.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 16));
 		txtpnSelecioneUmModo.setText("Selecione um modo de entrada");
 		txtpnSelecioneUmModo.setOpaque(false);
+		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -79,7 +80,7 @@ public class Inicial extends JFrame{
 					.addComponent(txtpnSelecioneUmModo, GroupLayout.PREFERRED_SIZE, 249, GroupLayout.PREFERRED_SIZE))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(301)
-					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE))
+					.addComponent(btnCliente, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(500)
 					.addComponent(btnGerente, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE))
@@ -92,7 +93,7 @@ public class Inicial extends JFrame{
 					.addComponent(txtpnSelecioneUmModo, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(346)
-					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+					.addComponent(btnCliente, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(346)
 					.addComponent(btnGerente, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
