@@ -75,6 +75,30 @@ public class Cliente extends Conta {
 
 	}
 	
+	public String[] encontradados (String conta) throws SQLException {
+		Statement stmt = con.createStatement();
+		String nome, uf, idade, cpf, tipo, telefone;
+		
+		ResultSet dados = stmt.executeQuery("select numconta,nome,uf,idade,cpf,tipodeconta,telefone from cliente");
+		if (dados.isBeforeFirst()) {
+			
+			while (dados.next()) {
+				String teste = dados.getString(1);
+				if (conta.equals(teste)) {
+					nome = dados.getString(2);
+					uf = dados.getString(3);
+					idade = dados.getString(4);
+					cpf = dados.getString(5);
+					tipo = dados.getString(6);
+					telefone = dados.getString(7);
+					String[] s = {nome,uf,idade,cpf,tipo,telefone};
+					return s;
+				}
+			}
+		}
+		return null;
+	}
+	
 	void editarconta () {
 		
 	}
