@@ -21,6 +21,9 @@ import java.awt.Color;
 import Classes.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class AcessoCliente extends JFrame {
 
@@ -45,6 +48,7 @@ public class AcessoCliente extends JFrame {
 				try {
 					AcessoCliente frame = new AcessoCliente();
 					frame.setVisible(true);
+					frame.textAgncia.requestFocusInWindow();//coloca o foco, inicialmente, no textfield da agencia
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -55,7 +59,16 @@ public class AcessoCliente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public AcessoCliente() {
+		
+		addWindowListener(new WindowAdapter() { // executa quando a janela é aberta
+            @Override
+            public void windowOpened(WindowEvent e) {
+                textAgncia.requestFocusInWindow(); //coloca o foco, inicialmente, no textfield da agencia
+            }
+        });
+	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 986, 592);
 		contentPane = new JPanel();
@@ -88,10 +101,12 @@ public class AcessoCliente extends JFrame {
         contentPane.add(txtpnSenhaIncorreta);
         txtpnSenhaIncorreta.setVisible(false);
 		
+        
 		textAgncia = new JTextField();
-		textAgncia.addFocusListener(new FocusAdapter() {
-			public void focusLost(FocusEvent e) {
-				Cliente c = null;
+		textAgncia.addActionListener(new ActionListener() { //se o enter for apertado, a info estiver correta, passa o foco para o próximo textField
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	Cliente c = null;
 				try {
 					c = new Cliente();
 				} catch (ClassNotFoundException | SQLException e1) {
@@ -108,22 +123,25 @@ public class AcessoCliente extends JFrame {
 						textConta.setEditable(true);
 						passwordField.setEditable(true);
 						txtpnAgnciaNoEncontrada.setVisible(false);
+						textConta.requestFocusInWindow();
 					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			}
-		});
+            }
+        });
 		
 		textAgncia.setBounds(328, 224, 191, 29);
 		contentPane.add(textAgncia);
 		textAgncia.setColumns(10);
 		
 		textConta = new JTextField();
-		textConta.addFocusListener(new FocusAdapter() {
-			public void focusLost(FocusEvent e) {
-				Cliente c = null;
+		
+		textConta.addActionListener(new ActionListener() { //se o enter for apertado, e a info estiver correta, passa o foco para o próximo textField
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	Cliente c = null;
 				try {
 					c = new Cliente();
 				} catch (ClassNotFoundException | SQLException e1) {
@@ -138,19 +156,27 @@ public class AcessoCliente extends JFrame {
 					else {
 						passwordField.setEditable(true);
 						txtpnContaNoEncontrada.setVisible(false);
+						passwordField.requestFocus();
+						passwordField.requestFocusInWindow();
 					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			}
-		});
+                
+            }
+        });
 		
 		textConta.setColumns(10);
 		textConta.setBounds(328, 263, 191, 29);
 		contentPane.add(textConta);
 		
 		passwordField = new JPasswordField();
+		passwordField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnNewButton.doClick(); //ao dar enter no campo de texto da senha, aciona o botão, tentando entrar
+			}
+		});
 		passwordField.setBounds(328, 302, 191, 29);
 		contentPane.add(passwordField);
 		
