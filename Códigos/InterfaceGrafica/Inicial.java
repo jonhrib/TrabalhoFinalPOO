@@ -1,24 +1,24 @@
 package InterfaceGrafica;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
-import java.awt.Canvas;
 import java.awt.Color;
 import javax.swing.JTextPane;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.Font;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 
-public class Inicial extends JFrame{
+public class Inicial extends JFrame {
 
-	private JFrame frame;
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
 
 	/**
 	 * Launch the application.
@@ -27,8 +27,8 @@ public class Inicial extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Inicial window = new Inicial();
-					window.frame.setVisible(true);
+					Inicial frame = new Inicial();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -37,17 +37,22 @@ public class Inicial extends JFrame{
 	}
 
 	/**
-	 * Create the application.
+	 * Create the frame.
 	 */
 	public Inicial() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 986, 592);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 986, 592);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
 		
-		// plano de fundo, não consegui deixar os elementos superiores a ele
+		// plano de fundo
         JLabel background = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface2.png"));
+        background.setBounds(-22, -14, 1012, 588);
 		
 		JButton btnCliente = new JButton("Cliente");
+		btnCliente.setBounds(306, 351, 173, 57);
 		btnCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AcessoCliente acessarcliente = new AcessoCliente();
@@ -57,6 +62,7 @@ public class Inicial extends JFrame{
 		btnCliente.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		JButton btnGerente = new JButton("Gerente");
+		btnGerente.setBounds(505, 351, 173, 57);
 		btnGerente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AcessoGerente acessargerente = new AcessoGerente();
@@ -64,42 +70,20 @@ public class Inicial extends JFrame{
 			}
 		});
 		btnGerente.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		contentPane.setLayout(null);
 		
 		JTextPane txtpnSelecioneUmModo = new JTextPane();
+		txtpnSelecioneUmModo.setBounds(377, 320, 249, 32);
 		txtpnSelecioneUmModo.setForeground(new Color(255, 255, 255));
 		txtpnSelecioneUmModo.setEditable(false);
 		txtpnSelecioneUmModo.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 16));
 		txtpnSelecioneUmModo.setText("Selecione um modo de entrada");
 		txtpnSelecioneUmModo.setOpaque(false);
-		
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(372)
-					.addComponent(txtpnSelecioneUmModo, GroupLayout.PREFERRED_SIZE, 249, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(301)
-					.addComponent(btnCliente, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(500)
-					.addComponent(btnGerente, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE))
-				.addComponent(background)
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(315)
-					.addComponent(txtpnSelecioneUmModo, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(346)
-					.addComponent(btnCliente, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(346)
-					.addComponent(btnGerente, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
-				.addComponent(background)
-		);
-		frame.getContentPane().setLayout(groupLayout);
+		contentPane.add(txtpnSelecioneUmModo);
+		contentPane.add(btnCliente);
+		contentPane.add(btnGerente);
+		contentPane.add(background);
+
 	}
 
 }
