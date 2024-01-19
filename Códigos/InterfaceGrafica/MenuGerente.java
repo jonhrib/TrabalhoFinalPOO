@@ -3,6 +3,7 @@ package InterfaceGrafica;
 import java.awt.EventQueue;
 
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -58,7 +59,7 @@ public class MenuGerente extends JFrame {
 		textPane.setForeground(new Color(0, 0, 0));
 		textPane.setEditable(false);
 		textPane.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
-		textPane.setText("UF: " + s[1] + "| Agência: " + agencia + " | ID: " + ID + "| Nome: " + s[0]);
+		textPane.setText("UF: " + s[1] + " | Agência: " + agencia + " | ID: " + ID + " | Nome: " + s[0]);
 		menuBar.add(textPane);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -71,18 +72,31 @@ public class MenuGerente extends JFrame {
 		btnNewButton.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 16));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				AcoesGerente criarconta = new AcoesGerente(1);
+				criarconta.setVisible(true);
 			}
 		});
 		btnNewButton.setBounds(209, 184, 245, 85);
 		contentPane.add(btnNewButton);
 		
 		JButton btnExcluirConta = new JButton("Excluir Conta");
+		btnExcluirConta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AcoesGerente excluirconta = new AcoesGerente(2);
+				excluirconta.setVisible(true);
+			}
+		});
 		btnExcluirConta.setForeground(new Color(0, 0, 160));
 		btnExcluirConta.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 16));
 		btnExcluirConta.setBounds(505, 183, 245, 85);
 		contentPane.add(btnExcluirConta);
 		
 		JButton btnAnliseDeEmprstimos = new JButton("Análise de Empréstimos");
+		btnAnliseDeEmprstimos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnAnliseDeEmprstimos.setForeground(new Color(0, 0, 160));
 		btnAnliseDeEmprstimos.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 16));
 		btnAnliseDeEmprstimos.setBounds(350, 306, 245, 85);
@@ -96,6 +110,17 @@ public class MenuGerente extends JFrame {
 		txtpnSelecioneUmaOpo.setOpaque(false);
 		txtpnSelecioneUmaOpo.setBounds(359, 142, 294, 32);
 		contentPane.add(txtpnSelecioneUmaOpo);
+		
+		JButton btnNewButton_1 = new JButton("Voltar para a tela de login");
+		btnNewButton_1.setForeground(new Color(0, 0, 0));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Inicial i = new Inicial();
+				i.setVisible(true);
+			}
+		});
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnNewButton_1.setBounds(10, 484, 174, 21);
+		contentPane.add(btnNewButton_1);
 	}
 }
-
