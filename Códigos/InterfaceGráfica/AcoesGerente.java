@@ -14,6 +14,7 @@ import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JPasswordField;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -99,14 +100,7 @@ public class AcoesGerente extends JFrame {
 		
 		Gerente g3 = new Gerente();
 		
-		pedidosdeemprestimo = g3.avaliaremprestimo(agencia);
-		
-		System.out.println(pedidosdeemprestimo.get(1)[0]);
-		System.out.println(pedidosdeemprestimo.get(1)[1]);
-		System.out.println(pedidosdeemprestimo.get(1)[2]);
-		System.out.println(pedidosdeemprestimo.get(1)[3]);
-		System.out.println(pedidosdeemprestimo.get(1)[4]);
-		System.out.println(pedidosdeemprestimo.get(1)[5]);
+		pedidosdeemprestimo.addAll(g3.avaliaremprestimo(agencia)); //aparentemente adiciona tudo no ArrayList
 		
 		DefaultComboBoxModel<String> pedidos = new DefaultComboBoxModel<>();
 		
@@ -114,9 +108,39 @@ public class AcoesGerente extends JFrame {
 			pedidos.addElement("Dados do pedido: Num. da conta: " + pedidosdeemprestimo.get(i)[0] + " | Tp de conta: " + pedidosdeemprestimo.get(i)[1] + " | Renda: " + pedidosdeemprestimo.get(i)[2] + " | Saldo: " + pedidosdeemprestimo.get(i)[3] + " | Dívida: " + pedidosdeemprestimo.get(i)[4] + " | Valor pré-disponibilizado: " + pedidosdeemprestimo.get(i)[5] + " | Valor pedido: " + pedidosdeemprestimo.get(i)[6]);
 		}
 		
+		JTextArea textArea_1 = new JTextArea();
 		JComboBox comboBox = new JComboBox(pedidos);
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int i = comboBox.getSelectedIndex(); //qual posição do combobox foi escolhida
+				textArea_1.setText("----------------------- Dados do pedido -----------------------\n");
+				textArea_1.append("Dados do pedido: Num. da conta: " + pedidosdeemprestimo.get(i)[0] + "\nTp de conta: " + pedidosdeemprestimo.get(i)[1] + "\nRenda: " + pedidosdeemprestimo.get(i)[2] + "\nSaldo: " + pedidosdeemprestimo.get(i)[3] + "\nDívida: " + pedidosdeemprestimo.get(i)[4] + "\nValor pré-disponibilizado: " + pedidosdeemprestimo.get(i)[5] + "\nValor pedido: " + pedidosdeemprestimo.get(i)[6]);
+			}
+		});
 		comboBox.setBounds(10, 44, 952, 21);
 		getContentPane().add(comboBox);
+		
+		textArea_1.setEditable(false);
+		textArea_1.setBounds(10, 75, 491, 470);
+		getContentPane().add(textArea_1);
+		
+		JButton btnNewButton_3 = new JButton("Autorizar depósito");
+		btnNewButton_3.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 14));
+		btnNewButton_3.setBounds(535, 272, 187, 34);
+		getContentPane().add(btnNewButton_3);
+		
+		JButton btnNewButton_3_1 = new JButton("Negar depósito");
+		btnNewButton_3_1.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 14));
+		btnNewButton_3_1.setBounds(535, 316, 187, 34);
+		getContentPane().add(btnNewButton_3_1);
+		
+		JTextPane txtpnAnliseDeEmprstimos = new JTextPane();
+		txtpnAnliseDeEmprstimos.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 16));
+		txtpnAnliseDeEmprstimos.setText("Análise de Empréstimos");
+		txtpnAnliseDeEmprstimos.setEditable(false);
+		txtpnAnliseDeEmprstimos.setBounds(394, 10, 217, 24);
+		txtpnAnliseDeEmprstimos.setOpaque(false);
+		getContentPane().add(txtpnAnliseDeEmprstimos);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
