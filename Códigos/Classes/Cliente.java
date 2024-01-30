@@ -2,6 +2,7 @@ package Classes;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 
 public class Cliente extends Conta {
 	
@@ -77,9 +78,9 @@ public class Cliente extends Conta {
 	
 	public String[] encontradados (String conta) throws SQLException {
 		Statement stmt = con.createStatement();
-		String nome, uf, idade, cpf, tipo, telefone,renda,senha,saldo;
+		String nome, uf, idade, cpf, tipo, telefone,renda,senha,saldo,divida,transacoes;
 		
-		ResultSet dados = stmt.executeQuery("select numconta,nome,uf,idade,cpf,tipodeconta,telefone,renda,senha,saldo from cliente");
+		ResultSet dados = stmt.executeQuery("select numconta,nome,uf,idade,cpf,tipodeconta,telefone,renda,senha,saldo,divida,transacoes from cliente");
 		if (dados.isBeforeFirst()) {
 			
 			while (dados.next()) {
@@ -94,7 +95,9 @@ public class Cliente extends Conta {
 					renda = dados.getString(8);
 					senha = dados.getString(9);
 					saldo = dados.getString(10);
-					String[] s = {nome,uf,idade,cpf,tipo,telefone,renda,senha,saldo};
+					divida = dados.getString(11);
+					transacoes = dados.getString(12).toString();
+					String[] s = {nome,uf,idade,cpf,tipo,telefone,renda,senha,saldo,divida,transacoes};
 					return s;
 				}
 			}
@@ -138,11 +141,38 @@ public class Cliente extends Conta {
 		
 	}
 	
-	void consultardivida () {
+	public void pagardivida (String conta,double valor) throws SQLException {
+		DecimalFormat df = new DecimalFormat("0.00");
+		double dividaantigo = 0, dividaatual,saldoatual,saldoantigo=0;
 		
+		Statement stmt = con.createStatement();
+		
+		ResultSet dados = stmt.executeQuery("select numconta,divida,saldo from cliente");
+		if (dados.isBeforeFirst()) {
+			
+			while (dados.next()) {
+				String teste = dados.getString(1);
+				if (conta.equals(teste)) {
+					dividaantigo = dados.getDouble(2);
+					saldoantigo = dados.getDouble(3);
+				}
+			}
+		}
+		dividaatual = dividaantigo-valor;
+		saldoatual = saldoantigo-valor;
+		
+		String saldodecimalf = df.format(saldoatual);
+		
+		saldoatual = Double.parseDouble(saldodecimalf.replaceAll(",","."));
+		
+		String auxiliar = "-"+valor;
+		String SQLInsert = "update cliente set divida = " + dividaatual + ",saldo = "+ saldoatual +",transacoes = COALESCE(transacoes, ARRAY[]::TEXT[]) || ARRAY['"+auxiliar+"'] where numconta = '" + conta + "'";
+		Statement stmts = con.createStatement();
+		stmts.executeUpdate(SQLInsert);
 	}
 	
 	public void saque (String conta,double valor) throws SQLException {
+		DecimalFormat df = new DecimalFormat("0.00");
 		Statement stmt = con.createStatement();
 		
 		ResultSet dados = stmt.executeQuery("select numconta,saldo from cliente");
@@ -160,7 +190,12 @@ public class Cliente extends Conta {
 		}
 		double saldo = saldoantigo - valor;
 		
-		String SQLInsert = "update cliente set saldo = " + saldo + " where numconta = '" + conta + "'";
+		String saldodecimalf = df.format(saldo);
+		
+		saldo = Double.parseDouble(saldodecimalf.replaceAll(",","."));
+		
+		String auxiliar = "-"+valor;
+		String SQLInsert = "update cliente set saldo = " + saldo + ",transacoes = COALESCE(transacoes, ARRAY[]::TEXT[]) || ARRAY['"+auxiliar+"'] where numconta = '" + conta + "'";
 		Statement stmts = con.createStatement();
 		stmts.executeUpdate(SQLInsert);
 		
@@ -205,6 +240,8 @@ public class Cliente extends Conta {
 	}
 	
 	public void aumentardivida (String conta, double valor) throws SQLException {
+		DecimalFormat df = new DecimalFormat("0.00");
+		
 		double dividaantiga = 0, dividaatual;
 		
 		Statement stmt = con.createStatement();
@@ -221,12 +258,17 @@ public class Cliente extends Conta {
 		}
 		dividaatual = valor+ dividaantiga;
 		
+		String dividadecimalf = df.format(dividaatual);
+		
+		dividaatual = Double.parseDouble(dividadecimalf.replaceAll(",","."));
+		
 		String SQLInsert = "update cliente set divida = " + dividaatual + " where numconta = '" + conta + "'";
 		Statement stmts = con.createStatement();
 		stmts.executeUpdate(SQLInsert);
 	}
 	
 	public void deposito (String conta, double valord) throws SQLException {
+		DecimalFormat df = new DecimalFormat("0.00");
 		double saldoantigo = 0, saldoatual;
 		
 		Statement stmt = con.createStatement();
@@ -243,7 +285,12 @@ public class Cliente extends Conta {
 		}
 		saldoatual = valord+ saldoantigo;
 		
-		String SQLInsert = "update cliente set saldo = " + saldoatual + " where numconta = '" + conta + "'";
+		String saldodecimalf = df.format(saldoatual);
+		
+		saldoatual = Double.parseDouble(saldodecimalf.replaceAll(",","."));
+		
+		String aux="+"+valord;
+		String SQLInsert = "update cliente set saldo = " + saldoatual + ",transacoes = COALESCE(transacoes, ARRAY[]::TEXT[]) || ARRAY['"+aux+"'] where numconta = '" + conta + "'";
 		Statement stmts = con.createStatement();
 		stmts.executeUpdate(SQLInsert);
 	}
