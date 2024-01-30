@@ -48,6 +48,7 @@ public class FinalCliente extends JFrame {
 		setContentPane(contentPane);
         contentPane.setLayout(null);
         
+        
         switch (cod) {
     	case "1.1":
     		JTextPane txtpnCadastroEfetivadoCom = new JTextPane();
@@ -88,6 +89,16 @@ public class FinalCliente extends JFrame {
     		txtpnPedidoAprovado.setEditable(false);
     	    contentPane.add(txtpnPedidoAprovado);
     		break;
+    	case "4":
+    		JTextPane txtpnPagamentoDivida = new JTextPane();
+    		txtpnPagamentoDivida.setFont(new Font("Bahnschrift", Font.PLAIN, 22));
+    		txtpnPagamentoDivida.setForeground(new Color(255, 255, 255));
+    		txtpnPagamentoDivida.setText("Seu pagamento de dívida foi efetuado com sucesso!");
+    		txtpnPagamentoDivida.setOpaque(false);
+    		txtpnPagamentoDivida.setBounds(219, 280, 543, 34);
+    		txtpnPagamentoDivida.setEditable(false);
+    	    contentPane.add(txtpnPagamentoDivida);
+    		break;
     	case "5":
     		JTextPane txtpnSaque = new JTextPane();
     		txtpnSaque.setFont(new Font("Bahnschrift", Font.PLAIN, 22));
@@ -97,6 +108,16 @@ public class FinalCliente extends JFrame {
     		txtpnSaque.setBounds(287, 286, 463, 34);
     		txtpnSaque.setEditable(false);
     	    contentPane.add(txtpnSaque);
+    		break;
+    	case "6":
+    		JTextPane txtpnDeposito = new JTextPane();
+    		txtpnDeposito.setFont(new Font("Bahnschrift", Font.PLAIN, 22));
+    		txtpnDeposito.setForeground(new Color(255, 255, 255));
+    		txtpnDeposito.setText("Seu depósito foi efetuado com sucesso!");
+    		txtpnDeposito.setOpaque(false);
+    		txtpnDeposito.setBounds(287, 286, 463, 34);
+    		txtpnDeposito.setEditable(false);
+    	    contentPane.add(txtpnDeposito);
     		break;
     }
         
