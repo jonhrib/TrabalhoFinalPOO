@@ -2,6 +2,7 @@ package Classes;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Gerente extends Conta {
@@ -154,6 +155,7 @@ public class Gerente extends Conta {
 	}
 	
 	public void autorizaemprestimo (String conta, double valorrequerido, double propostafinal) throws SQLException {
+		DecimalFormat df = new DecimalFormat("0.00");
 		// valorp = 0
 		// saldo += valorrequerido
 		// divida += propostafinal
@@ -174,10 +176,16 @@ public class Gerente extends Conta {
 				}
 			}
 		}
+		String auxiliar = "+"+valorrequerido;
 		double saldoatual = saldoantigo + valorrequerido;
 		double dividatual = dividaantiga + propostafinal;
 		
-		String SQLInsert = "update cliente set emprestimo = " + false + ", valordoemprestimo = " + 0 + ", valorrequerido = " + 0 + ", saldo = " + saldoatual + ", divida = " + dividatual + " where numconta = '" + conta + "'";
+		String dividadecimalf = df.format(dividatual);
+		
+		dividatual = Double.parseDouble(dividadecimalf.replaceAll(",","."));
+		
+		String SQLInsert = "update cliente set emprestimo = " + false + ", valordoemprestimo = " + 0 + ", valorrequerido = " + 0 + ", saldo = " + saldoatual + ", divida = " + dividatual + ",transacoes = COALESCE(transacoes, ARRAY[]::TEXT[]) || ARRAY['"+auxiliar+"'] where numconta = '" + conta + "'";
+		//String SQLInsert = "update cliente set emprestimo = " + false + ", valordoemprestimo = " + 0 + ", valorrequerido = " + 0 + ", saldo = " + saldoatual + ", divida = " + dividatual + " where numconta = '" + conta + "'";
 		Statement stmts = con.createStatement();
 		stmts.executeUpdate(SQLInsert);
 	}
