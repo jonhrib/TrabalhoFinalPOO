@@ -119,6 +119,16 @@ public class FinalCliente extends JFrame {
     		txtpnDeposito.setEditable(false);
     	    contentPane.add(txtpnDeposito);
     		break;
+    	case "7":
+    		JTextPane txtpnPagar = new JTextPane();
+    		txtpnPagar.setFont(new Font("Bahnschrift", Font.PLAIN, 22));
+    		txtpnPagar.setForeground(new Color(255, 255, 255));
+    		txtpnPagar.setText("Sua fatura foi paga!");
+    		txtpnPagar.setOpaque(false);
+    		txtpnPagar.setBounds(382, 285, 463, 34);
+    		txtpnPagar.setEditable(false);
+    	    contentPane.add(txtpnPagar);
+    		break;
     }
         
         JButton btnNewButton_1 = new JButton("Voltar para o Menu do Cliente");
