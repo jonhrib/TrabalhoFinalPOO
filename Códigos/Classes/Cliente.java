@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class Cliente extends Conta {
 	
@@ -21,6 +22,7 @@ public class Cliente extends Conta {
 	String telefone;
 	double saldo;
 	double divida;
+	ArrayList<String> cod = new ArrayList<String>();
 
 	@Override
 	public boolean acessar(int cod, String s, String s1, String s2) throws SQLException {
@@ -158,6 +160,21 @@ public class Cliente extends Conta {
 		String SQLInsert = "update contas set clientes = COALESCE(clientes, ARRAY[]::TEXT[]) || ARRAY['"+numconta+"'] where cod = '" + cod + "'";
 		Statement stmts = con.createStatement();
 		stmts.executeUpdate(SQLInsert);
+	}
+	
+	public ArrayList<String> codigos() throws SQLException{
+		Statement stmt = con.createStatement();
+		
+		ResultSet dados = stmt.executeQuery("select cod from contas");
+		String codigo = null;
+		
+		if (dados.isBeforeFirst()) {
+			while (dados.next()) {
+				codigo = dados.getString(1);
+				cod.add(codigo);
+			}
+		}
+		return cod;
 	}
 	
 	public boolean conferecod (String cod, String conta) throws SQLException {
