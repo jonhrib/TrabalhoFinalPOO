@@ -1,4 +1,6 @@
+//INSERT into contas (cod,valor,descricao,vencido,juros) values ('0005712', 2.59, 'Estacionamento do Seu Jorge', false,0.00)
 package Classes;
+import java.lang.reflect.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -105,6 +107,94 @@ public class Cliente extends Conta {
 		return null;
 	}
 	
+	public String [] dadosfatura (String cod) throws SQLException {
+		String valor = null,descricao = null,vencido = null,juros = null;
+		Statement stmt = con.createStatement();
+		ResultSet dados = stmt.executeQuery("select cod,valor,descricao,vencido,juros from contas");
+		
+		if (dados.isBeforeFirst()) {
+			
+			while (dados.next()) {
+				String teste = dados.getString(1);
+				if (cod.equals(teste)) {
+					valor = dados.getString(2);
+					descricao = dados.getString(3);
+					vencido = dados.getString(4);
+					juros = dados.getString(5);
+				}
+			}
+		}
+		
+		String [] s = {valor,descricao,vencido,juros};
+		return s;
+	}
+	
+	public void pagarconta (String numconta, String cod) throws SQLException {
+		Statement stmt = con.createStatement();
+		
+		ResultSet dados = stmt.executeQuery("select cod,valor,vencido,juros from contas");
+		String valor = null, vencido = null, juros = null;
+		if (dados.isBeforeFirst()) {
+			
+			while (dados.next()) {
+				String teste = dados.getString(1);
+				if (cod.equals(teste)) {
+					valor = dados.getString(2);
+					vencido = dados.getString(3);
+					juros = dados.getString(4);
+				}
+			}
+		}
+		Double pagar;
+		if (vencido.equals("t")) {
+			pagar = Double.parseDouble(valor) + ((Double.parseDouble(juros)/100)*Double.parseDouble(valor));
+		}
+		else {
+			pagar = Double.parseDouble(valor);
+		}
+		
+		saque(numconta, pagar);
+		
+		String SQLInsert = "update contas set clientes = COALESCE(clientes, ARRAY[]::TEXT[]) || ARRAY['"+numconta+"'] where cod = '" + cod + "'";
+		Statement stmts = con.createStatement();
+		stmts.executeUpdate(SQLInsert);
+	}
+	
+	public boolean conferecod (String cod, String conta) throws SQLException {
+		boolean result = false;
+		
+		Statement stmt = con.createStatement();
+		ResultSet dados = stmt.executeQuery("select cod,clientes from contas");
+		if (dados.isBeforeFirst()) {
+			
+			while (dados.next()) {
+				String codigo = dados.getString(1);
+				if (cod.equals(codigo)) {
+					while (dados.next()) {
+						java.sql.Array clientesArray = dados.getArray("clientes");
+						
+						if (clientesArray != null) {
+							String[] clientes = (String[]) dados.getArray("clientes").getArray(); //pega os clientes que pagaram a conta
+			                if (clientes.length > 0) {
+			                	for (String cliente : clientes) {
+				                    if (conta.equals(cliente)) { //se a conta atual já pagou a conta
+				                        result = false;
+				                        break;  // Se encontrou a conta, não é necessário continuar o loop
+				                    }
+				                }
+				                result = true;
+			                }
+			                else {
+			                	result = true;
+			                }
+						}
+					}
+				}
+			}
+		}
+		return result;
+	}
+	
 	public double encontravalordoemprestimo (String conta) throws SQLException {
 		Statement stmt = con.createStatement();
 		
@@ -135,10 +225,6 @@ public class Cliente extends Conta {
 			Statement stmts = con.createStatement();
 			stmts.executeUpdate(SQLInsert);
 		}
-	}
-	
-	void extrato () {
-		
 	}
 	
 	public void pagardivida (String conta,double valor) throws SQLException {
