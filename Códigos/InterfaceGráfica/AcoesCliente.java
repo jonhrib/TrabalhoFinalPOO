@@ -27,6 +27,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+
 import javax.swing.JPasswordField;
 import java.awt.Canvas;
 import javax.swing.JRadioButton;
@@ -102,271 +104,6 @@ public class AcoesCliente extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-        Cliente c7 = new Cliente();
-		
-		JTextPane textoContas = new JTextPane();
-		textoContas.setForeground(new Color(0, 0, 160));
-		textoContas.setEditable(false);
-		textoContas.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 26));
-		textoContas.setText("Pagamento de faturas");
-		textoContas.setBounds(326, 10, 295, 32);
-		textoContas.setOpaque(false);
-		contentPane.add(textoContas);
-		
-		JButton BotaoMenuC7 = new JButton("Voltar para o Menu do Cliente");
-		BotaoMenuC7.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		MenuCliente mc = null;
-				try {
-					mc = new MenuCliente(agencia,conta);
-				} catch (ClassNotFoundException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-        		mc.setVisible(true);
-        		dispose();
-        	}
-        });
-		BotaoMenuC7.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
-		BotaoMenuC7.setBounds(10, 507, 241, 27);
-        contentPane.add(BotaoMenuC7);
-        
-        JLabel background7 = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface2.png"));
-        background7.setBounds(-17, 483, 1012, 540);
-        contentPane.add(background7);
-        
-        JRadioButton rdbtnNewRadioButton = new JRadioButton("Inserir código");
-        rdbtnNewRadioButton.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
-        rdbtnNewRadioButton.setBounds(23, 59, 197, 21);
-        contentPane.add(rdbtnNewRadioButton);
-        
-        JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Buscar contas disponíveis");
-        rdbtnNewRadioButton_1.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
-        rdbtnNewRadioButton_1.setBounds(23, 86, 197, 21);
-        contentPane.add(rdbtnNewRadioButton_1);
-        
-        ButtonGroup buttonGroup1 = new ButtonGroup(); //grupo que garante que apenas um radio button seja acionado
-		
-		buttonGroup1.add(rdbtnNewRadioButton);
-		buttonGroup1.add(rdbtnNewRadioButton_1);
-		
-		JButton btnNewButton_7 = new JButton("Confirma");
-		
-		textField_3 = new JTextField();
-		textField_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnNewButton_7.doClick();
-			}
-		});
-        textField_3.setBounds(130, 161, 126, 19);
-        contentPane.add(textField_3);
-        textField_3.setColumns(10);
-        
-        JTextPane txtpnDigiteOCdigo = new JTextPane();
-        txtpnDigiteOCdigo.setText("Digite o código");
-        txtpnDigiteOCdigo.setOpaque(false);
-        txtpnDigiteOCdigo.setForeground(new Color(0, 0, 0));
-        txtpnDigiteOCdigo.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
-        txtpnDigiteOCdigo.setEditable(false);
-        txtpnDigiteOCdigo.setBounds(23, 161, 160, 21);
-        contentPane.add(txtpnDigiteOCdigo);
-        
-        textField_4 = new JTextField();
-        textField_4.setEditable(false);
-        textField_4.setColumns(10);
-        textField_4.setBounds(130, 190, 257, 19);
-        contentPane.add(textField_4);
-        
-        textField_5 = new JTextField();
-        textField_5.setEditable(false);
-        textField_5.setColumns(10);
-        textField_5.setBounds(130, 219, 257, 19);
-        contentPane.add(textField_5);
-        
-        textField_6 = new JTextField();
-        textField_6.setEditable(false);
-        textField_6.setColumns(10);
-        textField_6.setBounds(130, 248, 257, 19);
-        contentPane.add(textField_6);
-        
-        textField_7 = new JTextField();
-        textField_7.setEditable(false);
-        textField_7.setColumns(10);
-        textField_7.setBounds(130, 277, 257, 19);
-        contentPane.add(textField_7);
-        
-        JTextPane txtpnOCdigoNo = new JTextPane();
-        txtpnOCdigoNo.setText("O código não corresponde a nenhuma fatura ou ela já foi paga");
-        txtpnOCdigoNo.setOpaque(false);
-        txtpnOCdigoNo.setForeground(new Color(183, 0, 0));
-        txtpnOCdigoNo.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
-        txtpnOCdigoNo.setEditable(false);
-        txtpnOCdigoNo.setBounds(398, 161, 419, 21);
-        txtpnOCdigoNo.setVisible(false);
-        contentPane.add(txtpnOCdigoNo);
-        
-        JTextPane txtpnValor = new JTextPane();
-        txtpnValor.setText("Valor (R$)");
-        txtpnValor.setOpaque(false);
-        txtpnValor.setForeground(Color.BLACK);
-        txtpnValor.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
-        txtpnValor.setEditable(false);
-        txtpnValor.setBounds(48, 188, 76, 21);
-        contentPane.add(txtpnValor);
-        
-        JTextPane txtpnDigiteOCdigo_1_1 = new JTextPane();
-        txtpnDigiteOCdigo_1_1.setText("Descrição");
-        txtpnDigiteOCdigo_1_1.setOpaque(false);
-        txtpnDigiteOCdigo_1_1.setForeground(Color.BLACK);
-        txtpnDigiteOCdigo_1_1.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
-        txtpnDigiteOCdigo_1_1.setEditable(false);
-        txtpnDigiteOCdigo_1_1.setBounds(57, 219, 70, 21);
-        contentPane.add(txtpnDigiteOCdigo_1_1);
-        
-        JTextPane txtpnDigiteOCdigo_1_2 = new JTextPane();
-        txtpnDigiteOCdigo_1_2.setText("Vencido?");
-        txtpnDigiteOCdigo_1_2.setOpaque(false);
-        txtpnDigiteOCdigo_1_2.setForeground(Color.BLACK);
-        txtpnDigiteOCdigo_1_2.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
-        txtpnDigiteOCdigo_1_2.setEditable(false);
-        txtpnDigiteOCdigo_1_2.setBounds(57, 246, 70, 21);
-        contentPane.add(txtpnDigiteOCdigo_1_2);
-        
-        JTextPane txtpnDigiteOCdigo_1_3 = new JTextPane();
-        txtpnDigiteOCdigo_1_3.setText("Juros(%)");
-        txtpnDigiteOCdigo_1_3.setOpaque(false);
-        txtpnDigiteOCdigo_1_3.setForeground(Color.BLACK);
-        txtpnDigiteOCdigo_1_3.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
-        txtpnDigiteOCdigo_1_3.setEditable(false);
-        txtpnDigiteOCdigo_1_3.setBounds(48, 275, 72, 21);
-        contentPane.add(txtpnDigiteOCdigo_1_3);
-        
-        textField_8 = new JTextField();
-        textField_8.setEditable(false);
-        textField_8.setBounds(130, 306, 257, 19);
-        contentPane.add(textField_8);
-        textField_8.setColumns(10);
-        
-        JTextPane txtpnValorTotal = new JTextPane();
-        txtpnValorTotal.setEditable(false);
-        txtpnValorTotal.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
-        txtpnValorTotal.setText("Valor total (R$)" + valortotal);
-        txtpnValorTotal.setBounds(10, 306, 114, 19);
-        txtpnValorTotal.setOpaque(false);
-        contentPane.add(txtpnValorTotal);
-        
-        btnNewButton_7.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		try {
-					if(c7.conferecod(textField_3.getText(),conta)) { //se existe código correspondente
-						txtpnOCdigoNo.setVisible(false);
-						textField_4.setText(c7.dadosfatura(textField_3.getText())[0]);
-						textField_5.setText(c7.dadosfatura(textField_3.getText())[1]);
-						System.out.println(c7.dadosfatura(textField_3.getText())[2]);
-						String textVencimento = c7.dadosfatura(textField_3.getText())[2].equals("t") ? "Sim" : "Não";
-						textField_6.setText(textVencimento); //sim ou não
-						textField_7.setText(c7.dadosfatura(textField_3.getText())[3]);
-						if (c7.dadosfatura(textField_3.getText())[2].equals("t")){ //se está vencido
-				        	valortotal = Double.parseDouble(textField_4.getText()) + (Double.parseDouble(textField_7.getText()) * (Double.parseDouble(textField_4.getText())/100));
-				        }
-				        else {
-				        	valortotal = Double.parseDouble(textField_4.getText());
-				        }
-						textField_8.setText(String.valueOf(valortotal));
-					}
-					else { 
-						txtpnOCdigoNo.setVisible(true);
-				        textField_4.setText("");
-				        textField_5.setText("");
-				        textField_6.setText("");
-				        textField_7.setText("");
-				        textField_8.setText("");
-					}
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-        	}
-        });
-        btnNewButton_7.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 10));
-        btnNewButton_7.setBounds(279, 160, 85, 21);
-        contentPane.add(btnNewButton_7);
-        
-        JButton btnNewButton_7_1 = new JButton("PAGAR");
-        btnNewButton_7_1.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		try {
-					c7.pagarconta(conta, textField_3.getText());
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-        		FinalCliente fc = new FinalCliente("7",conta,agencia);
-        		fc.setVisible(true);
-        		dispose();
-        	}
-        });
-        btnNewButton_7_1.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 13));
-        btnNewButton_7_1.setBounds(209, 332, 85, 21);
-        contentPane.add(btnNewButton_7_1);
-        
-        textField_3.setVisible(false);
-        textField_4.setVisible(false);
-        textField_5.setVisible(false);
-        textField_6.setVisible(false);
-        textField_7.setVisible(false);
-        textField_8.setVisible(false);
-        txtpnValor.setVisible(false);
-        txtpnDigiteOCdigo.setVisible(false);
-        txtpnDigiteOCdigo_1_1.setVisible(false);
-        txtpnDigiteOCdigo_1_2.setVisible(false);
-        txtpnDigiteOCdigo_1_3.setVisible(false);
-        btnNewButton_7.setVisible(false);
-        btnNewButton_7_1.setVisible(false);
-        txtpnValorTotal.setVisible(false);
-        
-		JButton btnNewButton_6 = new JButton("Confirma escolha");
-		btnNewButton_6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (rdbtnNewRadioButton.isSelected()) { //se porta o código
-					textField_3.setVisible(true);
-					textField_4.setVisible(true);
-			        textField_5.setVisible(true);
-			        textField_6.setVisible(true);
-			        textField_7.setVisible(true);
-			        textField_8.setVisible(true);
-			        txtpnValor.setVisible(true);
-			        txtpnDigiteOCdigo.setVisible(true);
-			        txtpnDigiteOCdigo_1_1.setVisible(true);
-			        txtpnDigiteOCdigo_1_2.setVisible(true);
-			        txtpnDigiteOCdigo_1_3.setVisible(true);
-			        btnNewButton_7.setVisible(true);
-			        btnNewButton_7_1.setVisible(true);
-			        txtpnValorTotal.setVisible(true);
-			        textField_3.requestFocusInWindow();
-				}
-				else if (rdbtnNewRadioButton_1.isSelected()){ //se quer buscar
-					textField_3.setVisible(false);
-					textField_4.setVisible(false);
-			        textField_5.setVisible(false);
-			        textField_6.setVisible(false);
-			        textField_7.setVisible(false);
-			        textField_8.setVisible(false);
-			        txtpnValor.setVisible(false);
-			        txtpnDigiteOCdigo.setVisible(false);
-			        txtpnDigiteOCdigo_1_1.setVisible(false);
-			        txtpnDigiteOCdigo_1_2.setVisible(false);
-			        txtpnDigiteOCdigo_1_3.setVisible(false);
-			        btnNewButton_7.setVisible(false);
-			        btnNewButton_7_1.setVisible(false);
-			        txtpnValorTotal.setVisible(false);
-				}
-			}
-		});
-        btnNewButton_6.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 10));
-        btnNewButton_6.setBounds(226, 70, 138, 21);
-        contentPane.add(btnNewButton_6);
 
 		switch (cod) {
 			case 1: //editar dados
@@ -1631,7 +1368,311 @@ public class AcoesCliente extends JFrame {
 		        contentPane.add(dcanvas_1_6);
 				break;
 			case 7:
+				Cliente c7 = new Cliente();
 				
+				JTextPane textoContas = new JTextPane();
+				textoContas.setForeground(new Color(0, 0, 160));
+				textoContas.setEditable(false);
+				textoContas.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 26));
+				textoContas.setText("Pagamento de faturas");
+				textoContas.setBounds(326, 10, 295, 32);
+				textoContas.setOpaque(false);
+				contentPane.add(textoContas);
+				
+				JButton BotaoMenuC7 = new JButton("Voltar para o Menu do Cliente");
+				BotaoMenuC7.addActionListener(new ActionListener() {
+		        	public void actionPerformed(ActionEvent e) {
+		        		MenuCliente mc = null;
+						try {
+							mc = new MenuCliente(agencia,conta);
+						} catch (ClassNotFoundException | SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+		        		mc.setVisible(true);
+		        		dispose();
+		        	}
+		        });
+				BotaoMenuC7.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
+				BotaoMenuC7.setBounds(10, 507, 241, 27);
+		        contentPane.add(BotaoMenuC7);
+		        
+		        JLabel background7 = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface2.png"));
+		        background7.setBounds(-17, 483, 1012, 540);
+		        contentPane.add(background7);
+		        
+		        JRadioButton rdbtnNewRadioButton = new JRadioButton("Inserir código");
+		        rdbtnNewRadioButton.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
+		        rdbtnNewRadioButton.setBounds(23, 59, 197, 21);
+		        contentPane.add(rdbtnNewRadioButton);
+		        
+		        JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Buscar contas disponíveis");
+		        rdbtnNewRadioButton_1.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
+		        rdbtnNewRadioButton_1.setBounds(23, 86, 197, 21);
+		        contentPane.add(rdbtnNewRadioButton_1);
+		        
+		        ButtonGroup buttonGroup1 = new ButtonGroup(); //grupo que garante que apenas um radio button seja acionado
+				
+				buttonGroup1.add(rdbtnNewRadioButton);
+				buttonGroup1.add(rdbtnNewRadioButton_1);
+				
+				JButton btnNewButton_7 = new JButton("Confirma");
+				
+				textField_3 = new JTextField();
+				textField_3.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						btnNewButton_7.doClick();
+					}
+				});
+		        textField_3.setBounds(130, 161, 126, 19);
+		        contentPane.add(textField_3);
+		        textField_3.setColumns(10);
+		        
+		        JTextPane txtpnDigiteOCdigo = new JTextPane();
+		        txtpnDigiteOCdigo.setText("Digite o código");
+		        txtpnDigiteOCdigo.setOpaque(false);
+		        txtpnDigiteOCdigo.setForeground(new Color(0, 0, 0));
+		        txtpnDigiteOCdigo.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
+		        txtpnDigiteOCdigo.setEditable(false);
+		        txtpnDigiteOCdigo.setBounds(23, 161, 160, 21);
+		        contentPane.add(txtpnDigiteOCdigo);
+		        
+		        textField_4 = new JTextField();
+		        textField_4.setEditable(false);
+		        textField_4.setColumns(10);
+		        textField_4.setBounds(130, 190, 257, 19);
+		        contentPane.add(textField_4);
+		        
+		        textField_5 = new JTextField();
+		        textField_5.setEditable(false);
+		        textField_5.setColumns(10);
+		        textField_5.setBounds(130, 219, 257, 19);
+		        contentPane.add(textField_5);
+		        
+		        textField_6 = new JTextField();
+		        textField_6.setEditable(false);
+		        textField_6.setColumns(10);
+		        textField_6.setBounds(130, 248, 257, 19);
+		        contentPane.add(textField_6);
+		        
+		        textField_7 = new JTextField();
+		        textField_7.setEditable(false);
+		        textField_7.setColumns(10);
+		        textField_7.setBounds(130, 277, 257, 19);
+		        contentPane.add(textField_7);
+		        
+		        JTextPane txtpnOCdigoNo = new JTextPane();
+		        txtpnOCdigoNo.setText("O código não corresponde a nenhuma fatura ou ela já foi paga");
+		        txtpnOCdigoNo.setOpaque(false);
+		        txtpnOCdigoNo.setForeground(new Color(183, 0, 0));
+		        txtpnOCdigoNo.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
+		        txtpnOCdigoNo.setEditable(false);
+		        txtpnOCdigoNo.setBounds(398, 161, 419, 21);
+		        txtpnOCdigoNo.setVisible(false);
+		        contentPane.add(txtpnOCdigoNo);
+		        
+		        JTextPane txtpnValor = new JTextPane();
+		        txtpnValor.setText("Valor (R$)");
+		        txtpnValor.setOpaque(false);
+		        txtpnValor.setForeground(Color.BLACK);
+		        txtpnValor.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
+		        txtpnValor.setEditable(false);
+		        txtpnValor.setBounds(48, 188, 76, 21);
+		        contentPane.add(txtpnValor);
+		        
+		        JTextPane txtpnDigiteOCdigo_1_1 = new JTextPane();
+		        txtpnDigiteOCdigo_1_1.setText("Descrição");
+		        txtpnDigiteOCdigo_1_1.setOpaque(false);
+		        txtpnDigiteOCdigo_1_1.setForeground(Color.BLACK);
+		        txtpnDigiteOCdigo_1_1.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
+		        txtpnDigiteOCdigo_1_1.setEditable(false);
+		        txtpnDigiteOCdigo_1_1.setBounds(57, 219, 70, 21);
+		        contentPane.add(txtpnDigiteOCdigo_1_1);
+		        
+		        JTextPane txtpnDigiteOCdigo_1_2 = new JTextPane();
+		        txtpnDigiteOCdigo_1_2.setText("Vencido?");
+		        txtpnDigiteOCdigo_1_2.setOpaque(false);
+		        txtpnDigiteOCdigo_1_2.setForeground(Color.BLACK);
+		        txtpnDigiteOCdigo_1_2.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
+		        txtpnDigiteOCdigo_1_2.setEditable(false);
+		        txtpnDigiteOCdigo_1_2.setBounds(57, 246, 70, 21);
+		        contentPane.add(txtpnDigiteOCdigo_1_2);
+		        
+		        JTextPane txtpnDigiteOCdigo_1_3 = new JTextPane();
+		        txtpnDigiteOCdigo_1_3.setText("Juros(%)");
+		        txtpnDigiteOCdigo_1_3.setOpaque(false);
+		        txtpnDigiteOCdigo_1_3.setForeground(Color.BLACK);
+		        txtpnDigiteOCdigo_1_3.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
+		        txtpnDigiteOCdigo_1_3.setEditable(false);
+		        txtpnDigiteOCdigo_1_3.setBounds(48, 275, 72, 21);
+		        contentPane.add(txtpnDigiteOCdigo_1_3);
+		        
+		        textField_8 = new JTextField();
+		        textField_8.setEditable(false);
+		        textField_8.setBounds(130, 306, 257, 19);
+		        contentPane.add(textField_8);
+		        textField_8.setColumns(10);
+		        
+		        JTextPane txtpnValorTotal = new JTextPane();
+		        txtpnValorTotal.setEditable(false);
+		        txtpnValorTotal.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 14));
+		        txtpnValorTotal.setText("Valor total (R$)" + valortotal);
+		        txtpnValorTotal.setBounds(39, 306, 85, 19);
+		        txtpnValorTotal.setOpaque(false);
+		        contentPane.add(txtpnValorTotal);
+		        
+		        JButton btnNewButton_7_1 = new JButton("PAGAR");
+		        btnNewButton_7_1.addActionListener(new ActionListener() {
+		        	public void actionPerformed(ActionEvent e) {
+		        		try {
+							c7.pagarconta(conta, textField_3.getText());
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+		        		FinalCliente fc = new FinalCliente("7",conta,agencia);
+		        		fc.setVisible(true);
+		        		dispose();
+		        	}
+		        });
+		        btnNewButton_7_1.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 13));
+		        btnNewButton_7_1.setBounds(209, 332, 85, 21);
+		        contentPane.add(btnNewButton_7_1);
+		        
+		        btnNewButton_7.addActionListener(new ActionListener() {
+		        	public void actionPerformed(ActionEvent e) {
+		        		try {
+							if(c7.conferecod(textField_3.getText(),conta)) { //se existe código correspondente
+								txtpnOCdigoNo.setVisible(false);
+								textField_4.setText(c7.dadosfatura(textField_3.getText())[0]);
+								textField_5.setText(c7.dadosfatura(textField_3.getText())[1]);
+								System.out.println(c7.dadosfatura(textField_3.getText())[2]);
+								String textVencimento = c7.dadosfatura(textField_3.getText())[2].equals("t") ? "Sim" : "Não";
+								textField_6.setText(textVencimento); //sim ou não
+								textField_7.setText(c7.dadosfatura(textField_3.getText())[3]);
+								if (c7.dadosfatura(textField_3.getText())[2].equals("t")){ //se está vencido
+						        	valortotal = Double.parseDouble(textField_4.getText()) + (Double.parseDouble(textField_7.getText()) * (Double.parseDouble(textField_4.getText())/100));
+						        }
+						        else {
+						        	valortotal = Double.parseDouble(textField_4.getText());
+						        }
+								textField_8.setText(String.valueOf(valortotal));
+								btnNewButton_7_1.requestFocusInWindow();
+							}
+							else { 
+								txtpnOCdigoNo.setVisible(true);
+						        textField_4.setText("");
+						        textField_5.setText("");
+						        textField_6.setText("");
+						        textField_7.setText("");
+						        textField_8.setText("");
+							}
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+		        	}
+		        });
+		        btnNewButton_7.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 10));
+		        btnNewButton_7.setBounds(279, 160, 85, 21);
+		        contentPane.add(btnNewButton_7);
+		        
+		        textField_3.setVisible(false);
+		        textField_4.setVisible(false);
+		        textField_5.setVisible(false);
+		        textField_6.setVisible(false);
+		        textField_7.setVisible(false);
+		        textField_8.setVisible(false);
+		        txtpnValor.setVisible(false);
+		        txtpnDigiteOCdigo.setVisible(false);
+		        txtpnDigiteOCdigo_1_1.setVisible(false);
+		        txtpnDigiteOCdigo_1_2.setVisible(false);
+		        txtpnDigiteOCdigo_1_3.setVisible(false);
+		        btnNewButton_7.setVisible(false);
+		        btnNewButton_7_1.setVisible(false);
+		        txtpnValorTotal.setVisible(false);
+		        
+		        ArrayList<String> codigos = new ArrayList<String>();
+		        codigos.addAll(c7.codigos());
+		        
+		        DefaultComboBoxModel<String> cods = new DefaultComboBoxModel<>();
+				
+				for(int i = 0; i < codigos.size(); i++) {
+					cods.addElement("Código da Fatura: " + codigos.get(i));
+				}
+		        
+		        JComboBox comboBox_1 = new JComboBox(cods);
+		        comboBox_1.addActionListener(new ActionListener() {
+		        	public void actionPerformed(ActionEvent e) {
+		        		int i = comboBox_1.getSelectedIndex(); //qual posição do combobox foi escolhida
+		        		textField_3.setText(codigos.get(i));
+		        		btnNewButton_7.doClick();
+		        		textField_3.setVisible(true);
+		        		textField_3.setEnabled(false);
+						textField_4.setVisible(true);
+				        textField_5.setVisible(true);
+				        textField_6.setVisible(true);
+				        textField_7.setVisible(true);
+				        textField_8.setVisible(true);
+				        txtpnValor.setVisible(true);
+				        txtpnDigiteOCdigo.setVisible(true);
+				        txtpnDigiteOCdigo_1_1.setVisible(true);
+				        txtpnDigiteOCdigo_1_2.setVisible(true);
+				        txtpnDigiteOCdigo_1_3.setVisible(true);
+				        //btnNewButton_7.setVisible(true);
+				        btnNewButton_7_1.setVisible(true);
+				        txtpnValorTotal.setVisible(true);
+				        btnNewButton_7_1.requestFocusInWindow();
+		        	}
+		        });
+		        comboBox_1.setToolTipText("Selecione a fatura");
+		        comboBox_1.setBounds(23, 113, 939, 21);
+		        contentPane.add(comboBox_1);
+		        comboBox_1.setVisible(false);
+		        
+				JButton btnNewButton_6 = new JButton("Confirma escolha");
+				btnNewButton_6.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (rdbtnNewRadioButton.isSelected()) { //se porta o código
+							textField_3.setVisible(true);
+							textField_4.setVisible(true);
+					        textField_5.setVisible(true);
+					        textField_6.setVisible(true);
+					        textField_7.setVisible(true);
+					        textField_8.setVisible(true);
+					        txtpnValor.setVisible(true);
+					        txtpnDigiteOCdigo.setVisible(true);
+					        txtpnDigiteOCdigo_1_1.setVisible(true);
+					        txtpnDigiteOCdigo_1_2.setVisible(true);
+					        txtpnDigiteOCdigo_1_3.setVisible(true);
+					        btnNewButton_7.setVisible(true);
+					        btnNewButton_7_1.setVisible(true);
+					        txtpnValorTotal.setVisible(true);
+					        comboBox_1.setVisible(false);
+					        textField_3.requestFocusInWindow();
+						}
+						else if (rdbtnNewRadioButton_1.isSelected()){ //se quer buscar
+							textField_3.setVisible(false);
+							textField_4.setVisible(false);
+					        textField_5.setVisible(false);
+					        textField_6.setVisible(false);
+					        textField_7.setVisible(false);
+					        textField_8.setVisible(false);
+					        txtpnValor.setVisible(false);
+					        txtpnDigiteOCdigo.setVisible(false);
+					        txtpnDigiteOCdigo_1_1.setVisible(false);
+					        txtpnDigiteOCdigo_1_2.setVisible(false);
+					        txtpnDigiteOCdigo_1_3.setVisible(false);
+					        btnNewButton_7.setVisible(false);
+					        btnNewButton_7_1.setVisible(false);
+					        txtpnValorTotal.setVisible(false);
+					        comboBox_1.setVisible(true);
+						}
+					}
+				});
+		        btnNewButton_6.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 10));
+		        btnNewButton_6.setBounds(226, 70, 138, 21);
+		        contentPane.add(btnNewButton_6);
 				break;
 		}
 	}
