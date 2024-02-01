@@ -80,6 +80,7 @@ public class Cliente extends Conta {
 
 	}
 	
+	@Override
 	public String[] encontradados (String conta) throws SQLException {
 		Statement stmt = con.createStatement();
 		String nome, uf, idade, cpf, tipo, telefone,renda,senha,saldo,divida,transacoes;
@@ -187,24 +188,22 @@ public class Cliente extends Conta {
 			while (dados.next()) {
 				String codigo = dados.getString(1);
 				if (cod.equals(codigo)) {
-					while (dados.next()) {
-						java.sql.Array clientesArray = dados.getArray("clientes");
-						
-						if (clientesArray != null) {
-							String[] clientes = (String[]) dados.getArray("clientes").getArray(); //pega os clientes que pagaram a conta
-			                if (clientes.length > 0) {
-			                	for (String cliente : clientes) {
-				                    if (conta.equals(cliente)) { //se a conta atual já pagou a conta
-				                        result = false;
-				                        break;  // Se encontrou a conta, não é necessário continuar o loop
-				                    }
-				                }
-				                result = true;
-			                }
-			                else {
-			                	result = true;
-			                }
-						}
+					result = true;
+					java.sql.Array clientesArray = dados.getArray("clientes");
+					
+					if (clientesArray != null) {
+						String[] clientes = (String[]) dados.getArray("clientes").getArray(); //pega os clientes que pagaram a conta
+		                if (clientes.length > 0) {
+		                	for (String cliente : clientes) {
+			                    if (conta.equals(cliente)) { //se a conta atual já pagou a conta
+			                        result = false;
+			                        break;  // Se encontrou a conta, não é necessário continuar o loop
+			                    }
+		                	}
+		                }
+		                else {
+		                	result = true;
+		                }
 					}
 				}
 			}
