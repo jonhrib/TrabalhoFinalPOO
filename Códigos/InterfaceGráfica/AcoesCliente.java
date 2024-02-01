@@ -104,7 +104,7 @@ public class AcoesCliente extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+	
 		switch (cod) {
 			case 1: //editar dados
 				Cliente c1 = new Cliente();
@@ -815,7 +815,7 @@ public class AcoesCliente extends JFrame {
 				JTextPane txtpnAviso = new JTextPane();
 				txtpnAviso.setForeground(new Color(222, 9, 3));
 				txtpnAviso.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 14));
-				txtpnAviso.setBounds(335, 200, 627, 19);
+				txtpnAviso.setBounds(338, 336, 627, 19);
 				txtpnAviso.setOpaque(false);
 				contentPane.add(txtpnAviso);
 				txtpnAviso.setVisible(false);
@@ -993,6 +993,7 @@ public class AcoesCliente extends JFrame {
 		        dicanvas_1_6.setBackground(new Color(0, 0, 128));
 		        dicanvas_1_6.setBounds(872, -20, 100, 100);
 		        contentPane.add(dicanvas_1_6);
+
 				break;
 			case 5: //saque
 				addWindowListener(new WindowAdapter() { // executa quando a janela é aberta
