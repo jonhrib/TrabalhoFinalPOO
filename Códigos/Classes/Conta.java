@@ -2,7 +2,7 @@ package Classes;
 import java.sql.SQLException;
 
 
-public abstract class Conta extends Conexao {
+public abstract class Conta extends Conexao implements BancoEmjovi {
 	
 	Conta() throws ClassNotFoundException, SQLException {
 		super();
@@ -12,8 +12,6 @@ public abstract class Conta extends Conexao {
 	String agencia;
 	String senha;
 	String nome;
-	
-	public abstract boolean acessar (int cod, String s, String s1, String s2) throws SQLException;
 
 	public String getUF() {
 		return UF;
