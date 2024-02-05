@@ -12,6 +12,12 @@ public abstract class Conta extends Conexao implements BancoEmjovi {
 	String agencia;
 	String senha;
 	String nome;
+	
+	@Override
+	public abstract boolean acessar(int cod, String s, String s1, String s2) throws SQLException;
+
+	@Override
+	public abstract String[] encontradados(String conta) throws SQLException;
 
 	public String getUF() {
 		return UF;
