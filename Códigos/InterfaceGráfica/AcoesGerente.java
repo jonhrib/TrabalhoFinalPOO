@@ -657,7 +657,7 @@ public class AcoesGerente extends JFrame {
 				btnNewButton_1.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							dados = g2.encontrardados(conta);
+							dados = g2.encontradados(conta);
 							textArea.setText("");
 							textArea.append("Nome do Cliente: " + dados[0] + "\n");
 							textArea.append("CPF: " + dados[4] + "\n");
