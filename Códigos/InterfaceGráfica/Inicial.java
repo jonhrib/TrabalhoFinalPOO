@@ -52,7 +52,7 @@ public class Inicial extends JFrame {
         background.setBounds(-22, -14, 1012, 588);
 		
 		JButton btnCliente = new JButton("Cliente");
-		btnCliente.setBounds(306, 351, 173, 57);
+		btnCliente.setBounds(293, 339, 173, 57);
 		btnCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AcessoCliente acessarcliente = new AcessoCliente();
@@ -63,7 +63,7 @@ public class Inicial extends JFrame {
 		btnCliente.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		JButton btnGerente = new JButton("Gerente");
-		btnGerente.setBounds(505, 351, 173, 57);
+		btnGerente.setBounds(492, 339, 173, 57);
 		btnGerente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AcessoGerente acessargerente = new AcessoGerente();
@@ -75,7 +75,7 @@ public class Inicial extends JFrame {
 		contentPane.setLayout(null);
 		
 		JTextPane txtpnSelecioneUmModo = new JTextPane();
-		txtpnSelecioneUmModo.setBounds(377, 320, 249, 32);
+		txtpnSelecioneUmModo.setBounds(364, 308, 249, 32);
 		txtpnSelecioneUmModo.setForeground(new Color(255, 255, 255));
 		txtpnSelecioneUmModo.setEditable(false);
 		txtpnSelecioneUmModo.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 16));
