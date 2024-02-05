@@ -3,6 +3,7 @@ package InterfaceGrafica;
 import java.awt.EventQueue;
 
 
+import Classes.Excessao;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -96,7 +97,7 @@ public class AcoesCliente extends JFrame {
 		});
 	}
 	
-	public AcoesCliente(int cod, String conta, String agencia) throws ClassNotFoundException, SQLException {
+	public AcoesCliente(int cod, String conta, String agencia) throws ClassNotFoundException, SQLException, Excessao {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 986, 592);
 		contentPane = new JPanel();
@@ -1063,11 +1064,15 @@ public class AcoesCliente extends JFrame {
 								dispose();
 							}
 							else {
-								txtpnOValorDigitado.setVisible(true);
+								throw new Excessao(1);
+								//txtpnOValorDigitado.setVisible(true);
 							}
 						} catch (NumberFormatException | SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
+						} catch (Excessao e1) {
+							// TODO Auto-generated catch block
+							//e1.printStackTrace();
 						}
 					}
 				});
