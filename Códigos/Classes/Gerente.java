@@ -70,7 +70,8 @@ public class Gerente extends Conta {
 		else return false;
 	}
 	
-	public String[] encontrardados (String conta) throws SQLException {
+	@Override
+	public String[] encontradados (String conta) throws SQLException {
 		Statement stmt = con.createStatement();
 		String nome, uf, agencia, numconta, idade, cpf, senha, tipodeconta, renda, saldo, divida, telefone;
 		
@@ -188,10 +189,6 @@ public class Gerente extends Conta {
 		//String SQLInsert = "update cliente set emprestimo = " + false + ", valordoemprestimo = " + 0 + ", valorrequerido = " + 0 + ", saldo = " + saldoatual + ", divida = " + dividatual + " where numconta = '" + conta + "'";
 		Statement stmts = con.createStatement();
 		stmts.executeUpdate(SQLInsert);
-	}
-	
-	void excluirconta () {
-		
 	}
 	
 	public ArrayList<String []> avaliaremprestimo (String agencia) throws SQLException {
