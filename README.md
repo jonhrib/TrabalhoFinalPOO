@@ -25,3 +25,11 @@ Foram utilizados, para a execução final do trabalho, principalmente:
   9 - Interface gráfica;
   
   10 - Banco de Dados.
+
+  De todo modo, o presente projeto foi desenvolvido em comum conjunto entre os integrantes mencionados, de maneira que pudéssemos aproveitar melhor o tempo disposto e utilizar os conhecimentos individuais de cada um para contribuir ao resultado final, apresentado em três principais pastas:
+
+  Classes: todas as classes java comuns, contendo, principalmente, funções que auxiliam o banco a funcionar, como 'saque', 'depósito' e conexões com o banco de dados.
+
+  Interfaces Gráficas: todas as classes java com Interface Gráfica, usadas para exibir os resultados e receber dados do usuário, todas tendo ligações entre si e conexões com as classes comuns.
+
+  Arquivos: pasta dedicada a proposta original do trabalho, oferecida pelo docente da disciplina.
