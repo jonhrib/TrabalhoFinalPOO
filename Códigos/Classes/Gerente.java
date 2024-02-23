@@ -191,6 +191,13 @@ public class Gerente extends Conta {
 		stmts.executeUpdate(SQLInsert);
 	}
 	
+	public void negaemprestimo (String conta, double valorrequerido, double propostafinal) throws SQLException {
+		String SQLInsert = "update cliente set emprestimo = " + false + ", valorrequerido = " + 0 + " where numconta = '" + conta + "'";
+		//String SQLInsert = "update cliente set emprestimo = " + false + ", valordoemprestimo = " + 0 + ", valorrequerido = " + 0 + ", saldo = " + saldoatual + ", divida = " + dividatual + " where numconta = '" + conta + "'";
+		Statement stmts = con.createStatement();
+		stmts.executeUpdate(SQLInsert);
+	}
+	
 	public ArrayList<String []> avaliaremprestimo (String agencia) throws SQLException {
 		Statement stmt = con.createStatement();
 		String numconta, tipodeconta, renda, saldo, divida, valordoemprestimo, valorrequerido, parcelas, propostafinal;
