@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
+import Classes.Excessao;
 import Classes.Gerente;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
@@ -94,7 +96,8 @@ public class AcoesGerente extends JFrame {
 	 * @throws ClassNotFoundException 
 	 */
 	
-	public AcoesGerente(int cod, String agencia,String UF, String id, String senhaf) throws ClassNotFoundException, SQLException {
+	public AcoesGerente(int cod, String agencia,String UF, String id, String senhaf) throws ClassNotFoundException, SQLException, Excessao {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 986, 592);
 		getContentPane().setLayout(null);
@@ -621,14 +624,20 @@ public class AcoesGerente extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						char [] senhac = passwordField_2.getPassword();
 						String senhateste = new String (senhac);
-						if (senhateste.equals(senhaf)) {
-							btnNewButton_1.setEnabled(true);
-							btnNewButton_1.doClick();
-							MensagemDeErro.setVisible(false);
+						try {
+							if (senhateste.equals(senhaf)) {
+								btnNewButton_1.setEnabled(true);
+								btnNewButton_1.doClick();
+								MensagemDeErro.setVisible(false);
+							}
+							else {
+								throw new Excessao (3);
+								//MensagemDeErro.setText("A senha do gerente está incorreta");
+								//MensagemDeErro.setVisible(true);
+							}
 						}
-						else {
-							MensagemDeErro.setText("A senha do gerente está incorreta");
-							MensagemDeErro.setVisible(true);
+						catch (Excessao e1){
+							
 						}
 					}
 				});
@@ -803,9 +812,15 @@ public class AcoesGerente extends JFrame {
 				
 				btnNewButton_3_1.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						FinalGerente fg = new FinalGerente ("3.2",agencia,id);
-						fg.setVisible(true);
-						dispose();
+						try {
+							g3.negaemprestimo(conta,valorrequerido,propostafinal);
+							FinalGerente fg = new FinalGerente ("3.2",agencia,id);
+							fg.setVisible(true);
+							dispose();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				btnNewButton_3_1.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 14));

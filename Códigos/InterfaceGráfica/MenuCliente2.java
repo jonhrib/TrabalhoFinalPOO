@@ -48,6 +48,7 @@ public class MenuCliente2 extends JFrame {
 	 * @throws ClassNotFoundException 
 	 */
 	public MenuCliente2(String agencia, String conta) throws ClassNotFoundException, SQLException {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 986, 592);
 		
@@ -101,11 +102,22 @@ public class MenuCliente2 extends JFrame {
 		btnNewButton.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 16));
 		contentPane.add(btnNewButton);
 		
-		JButton btnConsultarExtrato_1 = new JButton("Depositar em outra conta");
+		JButton btnConsultarExtrato_1 = new JButton("Transferir dinheiro");
 		btnConsultarExtrato_1.setBounds(508, 82, 245, 85);
 		btnConsultarExtrato_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				AcoesCliente ac = null;
+				try {
+					ac = new AcoesCliente(8,conta,agencia);
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Excessao e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				ac.setVisible(true);
+				dispose();
 			}
 		});
 		btnConsultarExtrato_1.setForeground(new Color(0, 0, 160));

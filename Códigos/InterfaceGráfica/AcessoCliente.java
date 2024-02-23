@@ -62,6 +62,8 @@ public class AcessoCliente extends JFrame {
 	
 	public AcessoCliente() {
 		
+		setResizable(false);
+		
 		addWindowListener(new WindowAdapter() { // executa quando a janela é aberta
             @Override
             public void windowOpened(WindowEvent e) {

@@ -40,6 +40,7 @@ public class FinalCliente extends JFrame {
 	 * Create the frame.
 	 */
 	public FinalCliente(String cod, String conta, String agencia) {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 986, 592);
 		contentPane = new JPanel();
@@ -128,6 +129,16 @@ public class FinalCliente extends JFrame {
     		txtpnPagar.setBounds(382, 285, 463, 34);
     		txtpnPagar.setEditable(false);
     	    contentPane.add(txtpnPagar);
+    		break;
+    	case "8":
+    		JTextPane txtpnTrans = new JTextPane();
+    		txtpnTrans.setFont(new Font("Bahnschrift", Font.PLAIN, 22));
+    		txtpnTrans.setForeground(new Color(255, 255, 255));
+    		txtpnTrans.setText("Tranferência concluída!");
+    		txtpnTrans.setOpaque(false);
+    		txtpnTrans.setBounds(382, 285, 463, 34);
+    		txtpnTrans.setEditable(false);
+    	    contentPane.add(txtpnTrans);
     		break;
     }
         

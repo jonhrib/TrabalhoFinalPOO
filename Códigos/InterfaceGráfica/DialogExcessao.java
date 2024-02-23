@@ -10,6 +10,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.Window.Type;
 
 public class DialogExcessao extends JDialog {
 
@@ -34,14 +37,19 @@ public class DialogExcessao extends JDialog {
 	 * Create the dialog.
 	 */
 	public DialogExcessao() {
-		setBounds(100, 100, 777, 131);
+		setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 12));
+		setTitle("Erro");
+		setResizable(false);
+		setBounds(200, 250, 777, 131);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
+			textPane.setForeground(new Color(183, 0, 0));
+			textPane.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 1));
 			textPane.setEditable(false);
-			textPane.setBounds(10, 10, 418, 43);
+			textPane.setBounds(10, 10, 743, 43);
 			textPane.setOpaque(false);
 			contentPanel.add(textPane);
 		}

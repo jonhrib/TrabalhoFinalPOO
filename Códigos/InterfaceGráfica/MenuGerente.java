@@ -44,6 +44,7 @@ public class MenuGerente extends JFrame {
 	 * @throws ClassNotFoundException 
 	 */
 	public MenuGerente(String agencia, String ID) throws ClassNotFoundException, SQLException {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 986, 592);
 		
@@ -80,6 +81,9 @@ public class MenuGerente extends JFrame {
 				} catch (ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+				} catch (Excessao e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 				criarconta.setVisible(true);
 				dispose();
@@ -95,6 +99,9 @@ public class MenuGerente extends JFrame {
 				try {
 					excluirconta = new AcoesGerente(2,agencia,UF,ID,senha);
 				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Excessao e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -114,6 +121,9 @@ public class MenuGerente extends JFrame {
 				try {
 					emprestimos = new AcoesGerente(3,agencia,UF,ID,senha);
 				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Excessao e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}

@@ -80,6 +80,8 @@ public class AcoesCliente extends JFrame {
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private double valortotal;
+	private JTextField textField_9;
+	private JTextField textField_10;
 
 	/**
 	 * Launch the application.
@@ -98,6 +100,7 @@ public class AcoesCliente extends JFrame {
 	}
 	
 	public AcoesCliente(int cod, String conta, String agencia) throws ClassNotFoundException, SQLException, Excessao {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 986, 592);
 		contentPane = new JPanel();
@@ -1255,11 +1258,16 @@ public class AcoesCliente extends JFrame {
 								dispose();
 							}
 							else {
-								txtpnOValorDigitado.setVisible(true);
+								throw new Excessao(2);
+									//txtpnOValorDigitado.setVisible(true);
+								//txtpnOValorDigitado.setVisible(true);
 							}
 						} catch (NumberFormatException | SQLException e1) {
 							// TODO Auto-generated catch block
-							e1.printStackTrace();
+							//e1.printStackTrace();
+						} catch (Excessao e1) {
+							// TODO Auto-generated catch block
+							//e1.printStackTrace();
 						}
 					}
 				});
@@ -1565,7 +1573,7 @@ public class AcoesCliente extends JFrame {
 								textField_8.setText(String.valueOf(valortotal));
 								btnNewButton_7_1.requestFocusInWindow();
 							}
-							else { 
+							else {
 								txtpnOCdigoNo.setVisible(true);
 						        textField_4.setText("");
 						        textField_5.setText("");
@@ -1640,6 +1648,9 @@ public class AcoesCliente extends JFrame {
 				btnNewButton_6.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (rdbtnNewRadioButton.isSelected()) { //se porta o código
+							textField_3.setText("");
+							txtpnOCdigoNo.setVisible(false);
+							textField_3.setEnabled(true);
 							textField_3.setVisible(true);
 							textField_4.setVisible(true);
 					        textField_5.setVisible(true);
@@ -1680,7 +1691,299 @@ public class AcoesCliente extends JFrame {
 		        btnNewButton_6.setBounds(226, 70, 138, 21);
 		        contentPane.add(btnNewButton_6);
 				break;
+			case 8:
+				addWindowListener(new WindowAdapter() { // executa quando a janela é aberta
+		            @Override
+		            public void windowOpened(WindowEvent e) {
+		                textField_10.requestFocusInWindow(); //coloca o foco, inicialmente, no textfield da agencia
+		            }
+		        });
+				
+				Cliente c8 = new Cliente();
+				btnNewButton_2 = new JButton("Confirmar");
+				btnNewButton_2.setEnabled(false);
+				txtpnOValorDigitado = new JTextPane();
+				txtpnOValorDigitado.setForeground(new Color(217, 0, 0));
+				txtpnOValorDigitado.setText("Digite um valor maior que 0.");
+				txtpnOValorDigitado.setOpaque(false);
+				txtpnOValorDigitado.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 14));
+				txtpnOValorDigitado.setEditable(false);
+				txtpnOValorDigitado.setBounds(41, 403, 486, 22);
+				contentPane.add(txtpnOValorDigitado);
+				txtpnOValorDigitado.setVisible(false);
+				textField_1 = new JTextField();
+				textField_1.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						btnNewButton_2.requestFocusInWindow();
+						btnNewButton_2.setEnabled(true);
+						btnNewButton_2.doClick();
+					}
+				});
+				textField_1.setBounds(269, 362, 96, 19);
+				contentPane.add(textField_1);
+				textField_1.setColumns(10);
+				textField_1.setVisible(false);
+				
+				JTextPane txtpnDeposito2 = new JTextPane();
+				txtpnDeposito2.setForeground(new Color(0, 0, 160));
+				txtpnDeposito2.setEditable(false);
+				txtpnDeposito2.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 20));
+				txtpnDeposito2.setText("Transação Bancária");
+				txtpnDeposito2.setBounds(405, 217, 197, 32);
+				txtpnDeposito2.setOpaque(false);
+				contentPane.add(txtpnDeposito2);
+				
+				txtpnDigiteAsSuas = new JTextPane();
+				txtpnDigiteAsSuas.setEditable(false);
+				txtpnDigiteAsSuas.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 14));
+				txtpnDigiteAsSuas.setText("Digite o valor a ser depositado:");
+				txtpnDigiteAsSuas.setBounds(41, 362, 233, 19);
+				txtpnDigiteAsSuas.setOpaque(false);
+				txtpnDigiteAsSuas.setVisible(false);
+				contentPane.add(txtpnDigiteAsSuas);
+				
+				txtpnSaldoDisponvel = new JTextPane();
+				txtpnSaldoDisponvel.setEditable(false);
+				txtpnSaldoDisponvel.setFont(new Font("BancoDoBrasil Textos", Font.BOLD | Font.ITALIC, 14));
+				txtpnSaldoDisponvel.setText("Saldo disponível: R$"+ c8.encontradados(conta)[8]);
+				txtpnSaldoDisponvel.setBounds(624, 362, 262, 22);
+				txtpnSaldoDisponvel.setOpaque(false);
+				txtpnSaldoDisponvel.setVisible(false);
+				contentPane.add(txtpnSaldoDisponvel);
+				
+				btnNewButton_2.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						try {
+							if (Double.parseDouble(textField_1.getText()) > Double.parseDouble(c8.encontradados(conta)[8])) {
+								txtpnOValorDigitado.setVisible(true);
+								txtpnOValorDigitado.setText("O valor é maior que seu saldo atual");
+								textField_1.requestFocusInWindow();
+							}
+							else if(Double.parseDouble(textField_1.getText())>0) {
+								c8.deposito(textField_9.getText(), Double.parseDouble(textField_1.getText()));
+								c8.saque(conta,Double.parseDouble(textField_1.getText()));
+								txtpnOValorDigitado.setVisible(false);
+								FinalCliente fc = new FinalCliente("8",conta,agencia);
+								fc.setVisible(true);
+								dispose();
+							}
+							else {
+								txtpnOValorDigitado.setVisible(true);
+								textField_1.requestFocusInWindow();
+							}
+						} catch (NumberFormatException | SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				});
+				btnNewButton_2.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 12));
+				btnNewButton_2.setBounds(376, 360, 121, 21);
+				btnNewButton_2.setVisible(false);
+				contentPane.add(btnNewButton_2);
+				
+				JButton BotaoMenuC8 = new JButton("Voltar para o Menu do Cliente");
+				BotaoMenuC8.addActionListener(new ActionListener() {
+		        	public void actionPerformed(ActionEvent e) {
+		        		MenuCliente mc = null;
+						try {
+							mc = new MenuCliente(agencia,conta);
+						} catch (ClassNotFoundException | SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+		        		mc.setVisible(true);
+		        		dispose();
+		        	}
+		        });
+				BotaoMenuC8.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
+				BotaoMenuC8.setBounds(10, 507, 241, 27);
+		        contentPane.add(BotaoMenuC8);
+		        
+		        JLabel backgroundD2 = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface2.png"));
+		        backgroundD2.setBounds(-17, 483, 1012, 540);
+		        contentPane.add(backgroundD2);
+		        
+		        Canvas d2canvas = new Canvas();
+		        d2canvas.setBackground(new Color(0, 0, 160));
+		        d2canvas.setForeground(new Color(0, 0, 160));
+		        d2canvas.setBounds(-25, -41, 100, 100);
+		        contentPane.add(d2canvas);
+		        
+		        Canvas d2canvas_1 = new Canvas();
+		        d2canvas_1.setForeground(new Color(0, 0, 160));
+		        d2canvas_1.setBackground(new Color(0, 0, 128));
+		        d2canvas_1.setBounds(57, -20, 100, 100);
+		        contentPane.add(d2canvas_1);
+		        
+		        Canvas d2canvas_2 = new Canvas();
+		        d2canvas_2.setForeground(new Color(0, 0, 160));
+		        d2canvas_2.setBackground(new Color(0, 0, 160));
+		        d2canvas_2.setBounds(127, -41, 100, 100);
+		        contentPane.add(d2canvas_2);
+		        
+		        Canvas d2canvas_1_1 = new Canvas();
+		        d2canvas_1_1.setForeground(new Color(0, 0, 160));
+		        d2canvas_1_1.setBackground(new Color(0, 0, 128));
+		        d2canvas_1_1.setBounds(209, -20, 100, 100);
+		        contentPane.add(d2canvas_1_1);
+		        
+		        Canvas d2canvas_3 = new Canvas();
+		        d2canvas_3.setForeground(new Color(0, 0, 160));
+		        d2canvas_3.setBackground(new Color(0, 0, 160));
+		        d2canvas_3.setBounds(264, -41, 100, 100);
+		        contentPane.add(d2canvas_3);
+		        
+		        Canvas d2canvas_1_2 = new Canvas();
+		        d2canvas_1_2.setForeground(new Color(0, 0, 160));
+		        d2canvas_1_2.setBackground(new Color(0, 0, 128));
+		        d2canvas_1_2.setBounds(346, -20, 100, 100);
+		        contentPane.add(d2canvas_1_2);
+		        
+		        Canvas d2canvas_4 = new Canvas();
+		        d2canvas_4.setForeground(new Color(0, 0, 160));
+		        d2canvas_4.setBackground(new Color(0, 0, 160));
+		        d2canvas_4.setBounds(394, -41, 100, 100);
+		        contentPane.add(d2canvas_4);
+		        
+		        Canvas d2canvas_1_3 = new Canvas();
+		        d2canvas_1_3.setForeground(new Color(0, 0, 160));
+		        d2canvas_1_3.setBackground(new Color(0, 0, 128));
+		        d2canvas_1_3.setBounds(476, -20, 100, 100);
+		        contentPane.add(d2canvas_1_3);
+		        
+		        Canvas d2canvas_5 = new Canvas();
+		        d2canvas_5.setForeground(new Color(0, 0, 160));
+		        d2canvas_5.setBackground(new Color(0, 0, 160));
+		        d2canvas_5.setBounds(518, -41, 100, 100);
+		        contentPane.add(d2canvas_5);
+		        
+		        Canvas d2canvas_1_4 = new Canvas();
+		        d2canvas_1_4.setForeground(new Color(0, 0, 160));
+		        d2canvas_1_4.setBackground(new Color(0, 0, 128));
+		        d2canvas_1_4.setBounds(600, -20, 100, 100);
+		        contentPane.add(d2canvas_1_4);
+		        
+		        Canvas d2canvas_6 = new Canvas();
+		        d2canvas_6.setForeground(new Color(0, 0, 160));
+		        d2canvas_6.setBackground(new Color(0, 0, 160));
+		        d2canvas_6.setBounds(665, -41, 100, 100);
+		        contentPane.add(d2canvas_6);
+		        
+		        Canvas d2canvas_1_5 = new Canvas();
+		        d2canvas_1_5.setForeground(new Color(0, 0, 160));
+		        d2canvas_1_5.setBackground(new Color(0, 0, 128));
+		        d2canvas_1_5.setBounds(747, -20, 100, 100);
+		        contentPane.add(d2canvas_1_5);
+		        
+		        Canvas d2canvas_7 = new Canvas();
+		        d2canvas_7.setForeground(new Color(0, 0, 160));
+		        d2canvas_7.setBackground(new Color(0, 0, 160));
+		        d2canvas_7.setBounds(790, -41, 100, 100);
+		        contentPane.add(d2canvas_7);
+		        
+		        Canvas d2canvas_1_6 = new Canvas();
+		        d2canvas_1_6.setForeground(new Color(0, 0, 160));
+		        d2canvas_1_6.setBackground(new Color(0, 0, 128));
+		        d2canvas_1_6.setBounds(872, -20, 100, 100);
+		        contentPane.add(d2canvas_1_6);
+		        
+		        JButton btnConfirmaConta = new JButton("Confirmar");
+		        
+		        textField_9 = new JTextField();
+		        textField_9.addActionListener(new ActionListener() {
+		        	public void actionPerformed(ActionEvent e) {
+		        		btnConfirmaConta.setEnabled(true);
+		        		btnConfirmaConta.doClick();
+		        	}
+		        });
+		        textField_9.setBounds(232, 298, 96, 19);
+		        contentPane.add(textField_9);
+		        textField_9.setColumns(10);
+		        
+		        JTextPane txtpnContaErrada = new JTextPane();
+		        txtpnContaErrada.setText("A conta informada não existe");
+		        txtpnContaErrada.setForeground(new Color(183, 0, 0));
+		        txtpnContaErrada.setEditable(false);
+		        txtpnContaErrada.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 14));
+		        txtpnContaErrada.setBounds(335, 282, 609, 22);
+		        txtpnContaErrada.setOpaque(false);
+		        txtpnContaErrada.setVisible(false);
+				contentPane.add(txtpnContaErrada);
+		        
+		        JTextPane txtpnDigiteAConta = new JTextPane();
+		        txtpnDigiteAConta.setText("Dados sobre o depósito:");
+		        txtpnDigiteAConta.setOpaque(false);
+		        txtpnDigiteAConta.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 14));
+		        txtpnDigiteAConta.setEditable(false);
+		        txtpnDigiteAConta.setBounds(39, 242, 262, 19);
+		        contentPane.add(txtpnDigiteAConta);
+		        
+		        
+		        btnConfirmaConta.addActionListener(new ActionListener() {
+		        	public void actionPerformed(ActionEvent e) {
+		        		try {
+							if (!c8.verificaconta(textField_9.getText(),textField_10.getText())) { //se a conta não existe
+								btnNewButton_2.setVisible(false);
+								txtpnSaldoDisponvel.setVisible(false);
+								textField_1.setVisible(false);
+								txtpnDigiteAsSuas.setVisible(false);
+								txtpnContaErrada.setVisible(true);
+							}
+							else if (textField_9.getText().equals(conta) && textField_10.getText().equals(agencia)) {
+								txtpnContaErrada.setText("Para depositar em sua própria conta volte ao menu e selecione DEPÓSITO");
+								txtpnContaErrada.setVisible(true);
+							}
+							else {
+								txtpnContaErrada.setVisible(false);
+								btnNewButton_2.setVisible(true);
+								txtpnSaldoDisponvel.setVisible(true);
+								textField_1.setVisible(true);
+								textField_1.requestFocusInWindow();
+								txtpnDigiteAsSuas.setVisible(true);
+								textField_9.setEnabled(false);
+								textField_10.setEnabled(false);
+								btnConfirmaConta.setEnabled(false);
+							}
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+		        	}
+		        });
+		        btnConfirmaConta.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 12));
+		        btnConfirmaConta.setEnabled(false);
+		        btnConfirmaConta.setBounds(332, 311, 121, 21);
+		        contentPane.add(btnConfirmaConta); 
+		        
+		        textField_10 = new JTextField();
+		        textField_10.addActionListener(new ActionListener() {
+		        	public void actionPerformed(ActionEvent e) {
+		        		textField_9.requestFocusInWindow();
+		        	}
+		        });
+		        textField_10.setColumns(10);
+		        textField_10.setBounds(232, 272, 96, 19);
+		        contentPane.add(textField_10);
+		        
+		        JTextPane txtpnAgncia = new JTextPane();
+		        txtpnAgncia.setText("Agência");
+		        txtpnAgncia.setOpaque(false);
+		        txtpnAgncia.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 14));
+		        txtpnAgncia.setEditable(false);
+		        txtpnAgncia.setBounds(169, 271, 262, 19);
+		        contentPane.add(txtpnAgncia);
+		        
+		        JTextPane txtpnConta = new JTextPane();
+		        txtpnConta.setText("Conta");
+		        txtpnConta.setOpaque(false);
+		        txtpnConta.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 14));
+		        txtpnConta.setEditable(false);
+		        txtpnConta.setBounds(182, 295, 262, 19);
+		        contentPane.add(txtpnConta);
+				break;
 		}
+        
 	}
 	
 	private int exibirDialogoExclusao() {

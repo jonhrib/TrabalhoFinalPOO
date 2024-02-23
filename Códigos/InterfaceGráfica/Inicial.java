@@ -40,6 +40,7 @@ public class Inicial extends JFrame {
 	 * Create the frame.
 	 */
 	public Inicial() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 986, 592);
 		contentPane = new JPanel();

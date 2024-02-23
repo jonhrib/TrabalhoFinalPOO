@@ -60,6 +60,7 @@ public class AcessoGerente extends JFrame {
 	
 	public AcessoGerente() {
 		
+		setResizable(false);
 		addWindowListener(new WindowAdapter() { // executa quando a janela é aberta
             @Override
             public void windowOpened(WindowEvent e) {
