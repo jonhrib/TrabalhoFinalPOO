@@ -28,10 +28,10 @@ Foram utilizados, para a execução final do trabalho, principalmente:
 
   De todo modo, o presente projeto foi desenvolvido em comum conjunto entre os integrantes mencionados, de maneira que pudéssemos aproveitar melhor o tempo disposto e utilizar os conhecimentos individuais de cada um para contribuir ao resultado final, apresentado em duas principais pastas:
 
-  Códigos: 
+  1 Códigos: pasta dedicada a todos os componentes que fazem o programa rodar, indica-se que, caso queira executá-los, inicie pela classe 'Inicial.java', na pasta 'InterfaceGrafica'.
 
-    Classes: todas as classes java comuns, contendo, principalmente, funções que auxiliam o banco a funcionar, como 'saque', 'depósito' e conexões com o banco de dados.
+  1.1 Classes: todas as classes java comuns, contendo, principalmente, funções que auxiliam o banco a funcionar, como 'saque', 'depósito' e conexões com o banco de dados.
 
-    InterfaceGrafica: todas as classes java com Interface Gráfica, usadas para exibir os resultados e receber dados do usuário, todas tendo ligações entre si e conexões com as classes comuns.
+  1.2 InterfaceGrafica: todas as classes java com Interface Gráfica, usadas para exibir os resultados e receber dados do usuário, todas tendo ligações entre si e conexões com as classes comuns.
 
-  Arquivos: pasta dedicada a proposta original do trabalho, oferecida pelo docente da disciplina.
+  2 Arquivos: pasta dedicada a proposta original do trabalho, oferecida pelo docente da disciplina.
