@@ -4,7 +4,9 @@ O Banco EMJOVI é uma criação fictícia do grupo, figurando um banco real, com
 
 Foram utilizados, para a execução final do trabalho, principalmente:
   1 - Classes;
+  
   2 - Objetos;
+  
   3 - Herança;
   4 - Polimorfismo;
   5 - Classes abstratas;
