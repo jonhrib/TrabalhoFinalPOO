@@ -403,8 +403,14 @@ public class AcoesCliente extends JFrame {
 				
 				Cliente c2 = new Cliente();
 				String[] dados2 = c2.encontradados(conta);
-				StringBuilder transacoes = new StringBuilder(dados2[dados2.length-1]);	
-				transacoes.deleteCharAt(0);transacoes.deleteCharAt(transacoes.length()-1);
+				StringBuilder transacoes;
+				if (dados2[dados2.length-1] != null) {
+					transacoes = new StringBuilder(dados2[dados2.length-1]);	
+					transacoes.deleteCharAt(0);transacoes.deleteCharAt(transacoes.length()-1);
+				}
+				else {
+					transacoes = new StringBuilder("Não existem transações");
+				}
 				String []tSaldo= transacoes.toString().split(",") ;
 				
 				JButton btnNewButton_5 = new JButton("Extrato Completo");
