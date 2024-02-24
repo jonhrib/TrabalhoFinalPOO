@@ -35,3 +35,5 @@ Foram utilizados, para a execução final do trabalho, principalmente:
   1.2 InterfaceGrafica: todas as classes java com Interface Gráfica, usadas para exibir os resultados e receber dados do usuário, todas tendo ligações entre si e conexões com as classes comuns.
 
   2 Arquivos: pasta dedicada a proposta original do trabalho, oferecida pelo docente da disciplina.
+
+Além disso, a documentação do projeto está hospedada na plataforma Netlify, sob o endereço eletrônico https://documentacao-emjovi.netlify.app
