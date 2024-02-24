@@ -101,7 +101,12 @@ public class Cliente extends Conta {
 					senha = dados.getString(9);
 					saldo = dados.getString(10);
 					divida = dados.getString(11);
-					transacoes = dados.getString(12).toString();
+					if (dados.getString(12) != null) {
+						transacoes = dados.getString(12).toString();
+					}
+					else{
+						transacoes = null;
+					}
 					String[] s = {nome,uf,idade,cpf,tipo,telefone,renda,senha,saldo,divida,transacoes};
 					return s;
 				}
