@@ -368,7 +368,7 @@ public class AcoesGerente extends JFrame {
 						}
 						else {
 							try {
-								if (!g.verificaconta(textFieldNumConta.getText())) {
+								if (!g.verificaconta(textFieldNumConta.getText(), agencia)) {
 									txtpnMensagemDeErro.setVisible(false);
 									textFieldRenda.setEnabled(true);
 									textFieldRenda.requestFocusInWindow();
@@ -600,7 +600,7 @@ public class AcoesGerente extends JFrame {
 				textField_4.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							if(!g2.verificaconta(textField_4.getText())) {
+							if(!g2.verificaconta(textField_4.getText(), agencia)) {
 								MensagemDeErro.setText("Não é possível excluir uma conta inexistente");
 								MensagemDeErro.setVisible(true);
 							}
