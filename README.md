@@ -36,4 +36,4 @@ Foram utilizados, para a execução final do trabalho, principalmente:
 
   2 Arquivos: pasta dedicada a proposta original do trabalho, oferecida pelo docente da disciplina.
 
-Além disso, a documentação do projeto está hospedada na plataforma Netlify, sob o endereço eletrônico https://documentacao-emjovi.netlify.app
+Além disso, a documentação do projeto está hospedada na plataforma Netlify, sob o endereço eletrônico: <https://documentacao-emjovi.netlify.app>
