@@ -5,6 +5,11 @@ import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+//INSERT INTO gerente (nome, uf, agencia, senha, id) VALUES ('Alberto Cruz', 'SC', '0148-97','ac4567', '0147')
+//INSERT INTO gerente (nome, uf, agencia, senha, id) VALUES ('Sidneizinho', 'PR', '0517-52','37000000', '0537')
+//INSERT INTO gerente (nome, uf, agencia, senha, id) VALUES ('Rosamaria Serena', 'PR', '0248-91','14145aa', '1782')
+//INSERT INTO gerente (nome, uf, agencia, senha, id) VALUES ('Aracy Grassano', 'SP', '0457-52','1789654', '112')
+
 public class Gerente extends Conta {
 	
 	public Gerente() throws ClassNotFoundException, SQLException {
@@ -127,17 +132,19 @@ public class Gerente extends Conta {
 		stmt.executeUpdate(SQLInsert);
 	}
 	
-	public boolean verificaconta (String conta) throws SQLException{
+	public boolean verificaconta (String conta, String agencia) throws SQLException{
 		Statement stmt = con.createStatement();
 		int cont = 0;
 		
-		ResultSet dados = stmt.executeQuery("select numconta from cliente");
+		ResultSet dados = stmt.executeQuery("select numconta, agencia from cliente");
 		if (dados.isBeforeFirst()) {
 			
 			while (dados.next()) {
 				String teste = dados.getString(1);
-				if (conta.equals(teste)) {
-					cont++;
+				if (dados.getString(2).equals(agencia)) {
+					if (conta.equals(teste)) {
+						cont++;
+					}
 				}
 			}
 			if (cont > 0) return true;
