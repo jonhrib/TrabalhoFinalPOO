@@ -47,7 +47,7 @@ public class DialogExcessao extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			textPane.setForeground(new Color(183, 0, 0));
-			textPane.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 1));
+			textPane.setFont(new Font("BancoDoBrasil Textos", Font.BOLD, 12));
 			textPane.setEditable(false);
 			textPane.setBounds(10, 10, 743, 43);
 			textPane.setOpaque(false);
