@@ -120,7 +120,8 @@ public class FinalGerente extends JFrame {
         
 
 		// plano de fundo
-        JLabel background = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface2.png"));
+        //JLabel background = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface2.png"));
+        JLabel background = new JLabel(new ImageIcon(getClass().getResource("/imagens/Modelo interface2.png")));
         background.setBounds(-14, 0, 998, 592);
         contentPane.add(background);
         

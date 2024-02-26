@@ -49,7 +49,8 @@ public class Inicial extends JFrame {
 		setContentPane(contentPane);
 		
 		// plano de fundo
-        JLabel background = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface2.png"));
+        //JLabel background = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface2.png"));
+        JLabel background = new JLabel(new ImageIcon(getClass().getResource("/imagens/Modelo interface2.png")));
         background.setBounds(-22, -14, 1012, 588);
 		
 		JButton btnCliente = new JButton("Cliente");

@@ -121,17 +121,17 @@ public class AcessoCliente extends JFrame {
 					e1.printStackTrace();
 				}
 				try {
-					if (!c.acessar(1,textAgncia.getText(),null,null)) {
+					if (!c.acessar(1,textAgncia.getText(),null,null)) { // se o acesso não é permitido, ou seja, a agencia não existe //dois null
 						textConta.setEditable(false);
 						passwordField.setEditable(false);
 						txtpnAgnciaNoEncontrada.setVisible(true);
 					}
-					else {
+					else { //se a agencia existe
 						textConta.setEditable(true);
 						passwordField.setEditable(true);
 						textConta.setEnabled(true);
 						txtpnAgnciaNoEncontrada.setVisible(false);
-						textConta.requestFocusInWindow();
+						textConta.requestFocusInWindow(); //passa o foco para o textField de Conta
 					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -155,15 +155,15 @@ public class AcessoCliente extends JFrame {
 					e1.printStackTrace();
 				}
 				try {
-					if (!c.acessar(2,textAgncia.getText(),textConta.getText(),null)) {
+					if (!c.acessar(2,textAgncia.getText(),textConta.getText(),null)) { //se a conta não existe na agencia //um null
 						passwordField.setEditable(false);
 						txtpnContaNoEncontrada.setVisible(true);
 					}
-					else {
+					else { //se a conta existe na agencia
 						passwordField.setEditable(true);
 						txtpnContaNoEncontrada.setVisible(false);
 						passwordField.requestFocus();
-						passwordField.requestFocusInWindow();
+						passwordField.requestFocusInWindow(); //senha recebe o foco
 						passwordField.setEnabled(true);
 					}
 				} catch (SQLException e1) {
@@ -247,12 +247,12 @@ public class AcessoCliente extends JFrame {
 					char[] senhachar = passwordField.getPassword(); //pega o texto presente na passwordfield em um array de char
 	                String senha = new String(senhachar); //transforma o array de char em String
 	                
-					if (!c.acessar(3,textAgncia.getText(),textConta.getText(),senha)) {
+					if (!c.acessar(3,textAgncia.getText(),textConta.getText(),senha)) { //se a senha não corresponde
 				        txtpnSenhaIncorreta.setVisible(true);
 					}
-					else {
+					else { //se a senha está correta
 						txtpnSenhaIncorreta.setVisible(false);
-						MenuCliente menuc = new MenuCliente(textAgncia.getText(),textConta.getText());
+						MenuCliente menuc = new MenuCliente(textAgncia.getText(),textConta.getText()); //segue em frente, acessando o menu
 						menuc.setVisible(true);
 						dispose();
 					}

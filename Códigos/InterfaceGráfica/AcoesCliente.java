@@ -383,7 +383,7 @@ public class AcoesCliente extends JFrame {
 				
 				break;
 				
-			case 2:
+			case 2: //consultar extrato
 				JTextPane txtpnExtratoBancrio = new JTextPane();
 				txtpnExtratoBancrio.setForeground(new Color(255, 255, 255));
 				txtpnExtratoBancrio.setEditable(false);
@@ -522,11 +522,13 @@ public class AcoesCliente extends JFrame {
 				BotaoMenuE.setBounds(754, 518, 208, 27);
 		        contentPane.add(BotaoMenuE);
 				
-				JLabel logo = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\LogoEMJOVI.png"));
+				//JLabel logo = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\LogoEMJOVI.png"));
+				JLabel logo = new JLabel(new ImageIcon(getClass().getResource("/imagens/LogoEMJOVI.png")));
 			    logo.setBounds(-40, 42, 1012, 588);
 			    contentPane.add(logo);
 				
-				JLabel backgroundx = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\FundoEMJOVI.png"));
+				//JLabel backgroundx = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\FundoEMJOVI.png"));
+			    JLabel backgroundx = new JLabel(new ImageIcon(getClass().getResource("/imagens/FundoEMJOVI.png")));
 			    backgroundx.setBounds(-20, -13, 1012, 588);
 			    contentPane.add(backgroundx);
 				break;
@@ -918,7 +920,8 @@ public class AcoesCliente extends JFrame {
 				BotaoMenuC4.setBounds(10, 507, 241, 27);
 		        contentPane.add(BotaoMenuC4);
 		        
-		        JLabel backgroundDi = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface2.png"));
+		        //JLabel backgroundDi = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface2.png"));
+		        JLabel backgroundDi = new JLabel(new ImageIcon(getClass().getResource("/imagens/Modelo interface2.png")));
 		        backgroundDi.setBounds(-17, 483, 1012, 540);
 		        contentPane.add(backgroundDi);
 		        
@@ -1109,7 +1112,8 @@ public class AcoesCliente extends JFrame {
 				BotaoMenuC.setBounds(10, 507, 241, 27);
 		        contentPane.add(BotaoMenuC);
 		        
-		        JLabel background = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface2.png"));
+		        //JLabel background = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface2.png"));
+		        JLabel background = new JLabel(new ImageIcon(getClass().getResource("/imagens/Modelo interface2.png")));
 		        background.setBounds(-17, 483, 1012, 540);
 		        contentPane.add(background);
 		        
@@ -1301,7 +1305,8 @@ public class AcoesCliente extends JFrame {
 				BotaoMenuC6.setBounds(10, 507, 241, 27);
 		        contentPane.add(BotaoMenuC6);
 		        
-		        JLabel backgroundD = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface2.png"));
+		        //JLabel backgroundD = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface2.png"));
+		        JLabel backgroundD = new JLabel(new ImageIcon(getClass().getResource("/imagens/Modelo interface2.png")));
 		        backgroundD.setBounds(-17, 483, 1012, 540);
 		        contentPane.add(backgroundD);
 		        
@@ -1419,7 +1424,8 @@ public class AcoesCliente extends JFrame {
 				BotaoMenuC7.setBounds(10, 507, 241, 27);
 		        contentPane.add(BotaoMenuC7);
 		        
-		        JLabel background7 = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface2.png"));
+		        //JLabel background7 = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface2.png"));
+		        JLabel background7 = new JLabel(new ImageIcon(getClass().getResource("/imagens/Modelo interface2.png")));
 		        background7.setBounds(-17, 483, 1012, 540);
 		        contentPane.add(background7);
 		        
@@ -1547,14 +1553,22 @@ public class AcoesCliente extends JFrame {
 		        btnNewButton_7_1.addActionListener(new ActionListener() {
 		        	public void actionPerformed(ActionEvent e) {
 		        		try {
-							c7.pagarconta(conta, textField_3.getText());
+		        			if (valortotal <= Double.parseDouble(c7.encontradados(conta)[8])) {
+		        				c7.pagarconta(conta, textField_3.getText());
+		        				FinalCliente fc = new FinalCliente("7",conta,agencia);
+				        		fc.setVisible(true);
+				        		dispose();
+		        			}
+		        			else {
+		        				throw new Excessao (4);
+		        			}
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
+						} catch (Excessao e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
 						}
-		        		FinalCliente fc = new FinalCliente("7",conta,agencia);
-		        		fc.setVisible(true);
-		        		dispose();
 		        	}
 		        });
 		        btnNewButton_7_1.setFont(new Font("BancoDoBrasil Textos", Font.PLAIN, 13));
@@ -1808,7 +1822,8 @@ public class AcoesCliente extends JFrame {
 				BotaoMenuC8.setBounds(10, 507, 241, 27);
 		        contentPane.add(BotaoMenuC8);
 		        
-		        JLabel backgroundD2 = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface2.png"));
+		        //JLabel backgroundD2 = new JLabel(new ImageIcon("C:\\Users\\jonhv\\OneDrive\\Documentos\\Photoshop\\EMJOVI\\Modelo interface2.png"));
+		        JLabel backgroundD2 = new JLabel(new ImageIcon(getClass().getResource("/imagens/Modelo interface2.png")));
 		        backgroundD2.setBounds(-17, 483, 1012, 540);
 		        contentPane.add(backgroundD2);
 		        
