@@ -1,4 +1,6 @@
 //INSERT into contas (cod,valor,descricao,vencido,juros) values ('0005712', 2.59, 'Estacionamento do Seu Jorge', false,0.00)
+//UPDATE contas set clientes = ARRAY[]::text[]  apaga todos os registros de pagamanto em todas as contas
+
 package Classes;
 import java.lang.reflect.Array;
 import java.sql.ResultSet;
@@ -14,15 +16,15 @@ public class Cliente extends Conta {
 		
 	}
 
-	String numconta;
-	int idade;
-	String cpf;
-	String tipodeconta;
-	double renda;
-	String telefone;
-	double saldo;
-	double divida;
-	ArrayList<String> cod = new ArrayList<String>();
+	private String numconta;
+	private int idade;
+	private String cpf;
+	private String tipodeconta;
+	private double renda;
+	private String telefone;
+	private double saldo;
+	private double divida;
+	private ArrayList<String> cod = new ArrayList<String>();
 
 	@Override
 	public boolean acessar(int cod, String s, String s1, String s2) throws SQLException {
@@ -34,7 +36,7 @@ public class Cliente extends Conta {
 			ResultSet dados = stmt.executeQuery("select agencia from cliente");
 			if (dados.isBeforeFirst()) {
 				
-				while (dados.next()) {
+				while (dados.next()) { //confere se a agencia existe no banco
 					String agencia = dados.getString(1);
 					if (s.equals(agencia)) {
 						result = true;
@@ -48,7 +50,7 @@ public class Cliente extends Conta {
 			ResultSet dados = stmt.executeQuery("select agencia,numconta from cliente");
 			if (dados.isBeforeFirst()) {
 				
-				while (dados.next()) {
+				while (dados.next()) { //confere se a conta existe na agencia
 					String agencia = dados.getString(1);
 					String conta = dados.getString(2);
 					if (s.equals(agencia) && s1.equals(conta)) {
@@ -63,7 +65,7 @@ public class Cliente extends Conta {
 			ResultSet dados = stmt.executeQuery("select agencia,numconta,senha from cliente");
 			if (dados.isBeforeFirst()) {
 				
-				while (dados.next()) {
+				while (dados.next()) { //confere se a senha é correta dentro da conta que deve pertencer a agencia
 					String agencia = dados.getString(1);
 					String conta = dados.getString(2);
 					String senha = dados.getString(3);

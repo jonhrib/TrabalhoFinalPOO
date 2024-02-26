@@ -17,8 +17,8 @@ public class Gerente extends Conta {
 		
 	}
 
-	String ID;
-	ArrayList<String []> pedidosdeemprestimo = new ArrayList<String []>();
+	private String ID;
+	private ArrayList<String []> pedidosdeemprestimo = new ArrayList<String []>();
 	
 	@Override
 	public boolean acessar(int cod, String s, String s1, String s2) throws SQLException {

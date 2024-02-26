@@ -8,10 +8,10 @@ public abstract class Conta extends Conexao implements BancoEmjovi {
 		super();
 	}
 
-	String UF;
-	String agencia;
-	String senha;
-	String nome;
+	protected String UF;
+	protected String agencia;
+	protected String senha;
+	protected String nome;
 	
 	@Override
 	public abstract boolean acessar(int cod, String s, String s1, String s2) throws SQLException;
