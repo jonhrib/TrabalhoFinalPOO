@@ -238,16 +238,26 @@ public class Cliente extends Conta {
 	public void editarconta (int cod, String conta, String nome, String renda, String telefone, String senha) throws SQLException {
 		if (cod == 1) { //sem senha
 			double rendad = Double.parseDouble(renda);
-			String SQLInsert = "update cliente set nome = '" + nome + "', renda = " + rendad + ", telefone = '" + telefone + "' where numconta = '" + conta + "'";
+			String telefonea = formatarTelefone(telefone);
+			String SQLInsert = "update cliente set nome = '" + nome + "', renda = " + rendad + ", telefone = '" + telefonea + "' where numconta = '" + conta + "'";
 			Statement stmts = con.createStatement();
 			stmts.executeUpdate(SQLInsert);
 		}
 		else if (cod ==2) { //com senha
 			double rendad = Double.parseDouble(renda);
-			String SQLInsert = "update cliente set nome = '" + nome + "', renda = " + rendad + ", telefone = '" + telefone + "', senha = '"+ senha + "' where numconta = '" + conta + "'";
+			String telefonea = formatarTelefone(telefone);
+			String SQLInsert = "update cliente set nome = '" + nome + "', renda = " + rendad + ", telefone = '" + telefonea + "', senha = '"+ senha + "' where numconta = '" + conta + "'";
 			Statement stmts = con.createStatement();
 			stmts.executeUpdate(SQLInsert);
 		}
+	}
+	
+	public static String formatarTelefone(String telefone) {
+		//remove tudo que não sejam números de 0 a 9
+	    telefone = telefone.replaceAll("[^0-9]", ""); //regex ou expressão regular
+
+	    // Aplica a formatação do telefone (xx) xxxx-xxxx
+	    return "(" + telefone.substring(0, 2) + ") " + telefone.substring(2, 7) + "-" + telefone.substring(7, 11);
 	}
 	
 	public void pagardivida (String conta,double valor) throws SQLException {

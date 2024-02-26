@@ -23,6 +23,12 @@ public class Excessao extends Exception {
 				de3.edita(erro3);
 				de3.setVisible(true);
 				break;
+			case 4: //senhagerente
+				String erro4 = "O saldo não é suficiente.";
+				DialogExcessao de4 = new DialogExcessao();
+				de4.edita(erro4);
+				de4.setVisible(true);
+				break;
 		}
 	}
 }

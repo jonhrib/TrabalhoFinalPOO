@@ -247,14 +247,16 @@ public class Gerente extends Conta {
 	}
 	
 	public static String formatarCPF(String cpf) {
-	    cpf = cpf.replaceAll("[^0-9]", "");
-	        // Aplica a formatação do CPF (###.###.###-##)
+		//remove tudo que não sejam números de 0 a 9
+	    cpf = cpf.replaceAll("[^0-9]", ""); //regex ou expressão regular
+	    
+	    // Aplica a formatação do CPF (###.###.###-##)
 	    return cpf.substring(0, 3) + "." + cpf.substring(3, 6) + "." + cpf.substring(6, 9) + "-" + cpf.substring(9);
    }
 	
 	public static String formatarTelefone(String telefone) {
-	    // Remove qualquer caracter que não seja um dígito
-	    telefone = telefone.replaceAll("[^0-9]", "");
+		//remove tudo que não sejam números de 0 a 9
+	    telefone = telefone.replaceAll("[^0-9]", ""); //regex ou expressão regular
 
 	    // Aplica a formatação do telefone (xx) xxxx-xxxx
 	    return "(" + telefone.substring(0, 2) + ") " + telefone.substring(2, 7) + "-" + telefone.substring(7, 11);
