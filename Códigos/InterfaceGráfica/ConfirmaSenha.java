@@ -7,10 +7,14 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Classes.Cliente;
+
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
@@ -25,7 +29,7 @@ public class ConfirmaSenha extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			ConfirmaSenha dialog = new ConfirmaSenha(null,null,null);
+			ConfirmaSenha dialog = new ConfirmaSenha(null,null,null,null,null,null,null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -36,7 +40,7 @@ public class ConfirmaSenha extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ConfirmaSenha(String senhaatual, String conta, String agencia) {
+	public ConfirmaSenha(String senhaatual, String conta, String agencia, String nome, String renda, String telefone, String senha) {
 		setResizable(false);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -86,6 +90,19 @@ public class ConfirmaSenha extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					if (textField.getText().equals(senhaatual)) {
 						txtpnSenhaIncorreta.setVisible(false);
+						Cliente c1 = null;
+						try {
+							c1 = new Cliente ();
+						} catch (ClassNotFoundException | SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						try {
+							c1.editarconta(2, conta, nome, renda, telefone, senha);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						FinalCliente fc = new FinalCliente("1.1",conta,agencia);
 						fc.setVisible(true);
 						dispose();
@@ -104,6 +121,7 @@ public class ConfirmaSenha extends JDialog {
 			cancelButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					FinalCliente fc = new FinalCliente("1.2",conta,agencia);
+					fc.setVisible(true);
 					dispose();
 				}
 			});

@@ -21,7 +21,7 @@ public class Inicial extends JFrame {
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
+	 * @author Emilaine do Prado Correia, João Vitor Souza Ribeiro e Vinicius Ferreira Couto
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

@@ -108,6 +108,8 @@ public class AcoesCliente extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		
 	
 		switch (cod) {
 			case 1: //editar dados
@@ -139,7 +141,13 @@ public class AcoesCliente extends JFrame {
 				textFieldIdade.setEnabled(false);
 				textFieldCPF.setEnabled(false);
 				textFieldTpC.setEnabled(false);
+				JButton btnNewButton_1 = new JButton("Confirma");
 				passwordField_1 = new JPasswordField();
+				passwordField_1.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						btnNewButton_1.doClick();
+					}
+				});
 				chckbxMostrarSenha = new JCheckBox("Mostrar Senha");
 				chckbxMostrarSenha.setEnabled(false);
 				passwordField_1.setEnabled(false);
@@ -319,7 +327,6 @@ public class AcoesCliente extends JFrame {
 				contentPane.add(txtpnSenha);
 				txtpnSenha.setVisible(false);
 				
-				JButton btnNewButton_1 = new JButton("Confirma");
 				btnNewButton_1.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						String nome = textFieldNome.getText();
@@ -328,20 +335,15 @@ public class AcoesCliente extends JFrame {
 						if(chckbxAlterarSenha.isSelected()) {// se a senha será alterada
 							char[] senhas = passwordField_1.getPassword();
 							String senha = new String (senhas);
-							try {
-								if (senha.equals(dados[7])) {
-									txtpnSenha.setVisible(true);
-								}
-								else{
-									ConfirmaSenha cs = new ConfirmaSenha(dados[7],conta,agencia);
-									cs.setVisible(true);
-									c1.editarconta(2, conta, nome, renda, telefone, senha);
-									txtpnSenha.setVisible(false);
-									dispose();
-								}
-							} catch (SQLException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
+							if (senha.equals(dados[7])) {
+								txtpnSenha.setVisible(true);
+							}
+							else{
+								ConfirmaSenha cs = new ConfirmaSenha(dados[7],conta,agencia,nome,renda,telefone,senha);
+								cs.setVisible(true);
+								//c1.editarconta(2, conta, nome, renda, telefone, senha);
+								txtpnSenha.setVisible(false);
+								dispose();
 							}
 						}
 						else {
@@ -1387,7 +1389,7 @@ public class AcoesCliente extends JFrame {
 		        dcanvas_1_6.setBounds(872, -20, 100, 100);
 		        contentPane.add(dcanvas_1_6);
 				break;
-			case 7:
+			case 7: //pagar conta
 				Cliente c7 = new Cliente();
 				
 				JTextPane textoContas = new JTextPane();
@@ -1697,7 +1699,7 @@ public class AcoesCliente extends JFrame {
 		        btnNewButton_6.setBounds(226, 70, 138, 21);
 		        contentPane.add(btnNewButton_6);
 				break;
-			case 8:
+			case 8: //transferir dinheiro
 				addWindowListener(new WindowAdapter() { // executa quando a janela é aberta
 		            @Override
 		            public void windowOpened(WindowEvent e) {
